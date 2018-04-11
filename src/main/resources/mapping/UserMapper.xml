@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzu.su.manager.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.gzu.su.manager.model.User">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="REDOOM_SALT" jdbcType="VARCHAR" property="redoomSalt" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_SEX" jdbcType="VARCHAR" property="userSex" />
+    <result column="USER_POSITION" jdbcType="VARCHAR" property="userPosition" />
+    <result column="USER_DEPARTMENT_NAME" jdbcType="VARCHAR" property="userDepartmentName" />
+    <result column="USER_MAJOR" jdbcType="VARCHAR" property="userMajor" />
+    <result column="USER_GRADE" jdbcType="VARCHAR" property="userGrade" />
+    <result column="E_MAIL" jdbcType="VARCHAR" property="eMail" />
+    <result column="USER_PHONE_NU" jdbcType="VARCHAR" property="userPhoneNu" />
+    <result column="USER_START_TIME" jdbcType="VARCHAR" property="userStartTime" />
+    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+    <result column="USER_STATUS" jdbcType="VARCHAR" property="userStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, PASSWORD, REDOOM_SALT, USER_NAME, USER_SEX, USER_POSITION, USER_DEPARTMENT_NAME, 
+    USER_MAJOR, USER_GRADE, E_MAIL, USER_PHONE_NU, USER_START_TIME, CREATE_TIME, UPDATE_TIME, 
+    USER_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gzusu_manager_user_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from gzusu_manager_user_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gzu.su.manager.model.User">
+    insert into gzusu_manager_user_info (ID, USER_ID, PASSWORD, 
+      REDOOM_SALT, USER_NAME, USER_SEX, 
+      USER_POSITION, USER_DEPARTMENT_NAME, USER_MAJOR, 
+      USER_GRADE, E_MAIL, USER_PHONE_NU, 
+      USER_START_TIME, CREATE_TIME, UPDATE_TIME, 
+      USER_STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{redoomSalt,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
+      #{userPosition,jdbcType=VARCHAR}, #{userDepartmentName,jdbcType=VARCHAR}, #{userMajor,jdbcType=VARCHAR}, 
+      #{userGrade,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, #{userPhoneNu,jdbcType=VARCHAR}, 
+      #{userStartTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{userStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gzu.su.manager.model.User">
+    insert into gzusu_manager_user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="redoomSalt != null">
+        REDOOM_SALT,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userSex != null">
+        USER_SEX,
+      </if>
+      <if test="userPosition != null">
+        USER_POSITION,
+      </if>
+      <if test="userDepartmentName != null">
+        USER_DEPARTMENT_NAME,
+      </if>
+      <if test="userMajor != null">
+        USER_MAJOR,
+      </if>
+      <if test="userGrade != null">
+        USER_GRADE,
+      </if>
+      <if test="eMail != null">
+        E_MAIL,
+      </if>
+      <if test="userPhoneNu != null">
+        USER_PHONE_NU,
+      </if>
+      <if test="userStartTime != null">
+        USER_START_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="userStatus != null">
+        USER_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="redoomSalt != null">
+        #{redoomSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null">
+        #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="userDepartmentName != null">
+        #{userDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMajor != null">
+        #{userMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="userGrade != null">
+        #{userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null">
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoneNu != null">
+        #{userPhoneNu,jdbcType=VARCHAR},
+      </if>
+      <if test="userStartTime != null">
+        #{userStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gzu.su.manager.model.User">
+    update gzusu_manager_user_info
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="redoomSalt != null">
+        REDOOM_SALT = #{redoomSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        USER_SEX = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null">
+        USER_POSITION = #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="userDepartmentName != null">
+        USER_DEPARTMENT_NAME = #{userDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMajor != null">
+        USER_MAJOR = #{userMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="userGrade != null">
+        USER_GRADE = #{userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null">
+        E_MAIL = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoneNu != null">
+        USER_PHONE_NU = #{userPhoneNu,jdbcType=VARCHAR},
+      </if>
+      <if test="userStartTime != null">
+        USER_START_TIME = #{userStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gzu.su.manager.model.User">
+    update gzusu_manager_user_info
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      REDOOM_SALT = #{redoomSalt,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_SEX = #{userSex,jdbcType=VARCHAR},
+      USER_POSITION = #{userPosition,jdbcType=VARCHAR},
+      USER_DEPARTMENT_NAME = #{userDepartmentName,jdbcType=VARCHAR},
+      USER_MAJOR = #{userMajor,jdbcType=VARCHAR},
+      USER_GRADE = #{userGrade,jdbcType=VARCHAR},
+      E_MAIL = #{eMail,jdbcType=VARCHAR},
+      USER_PHONE_NU = #{userPhoneNu,jdbcType=VARCHAR},
+      USER_START_TIME = #{userStartTime,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      USER_STATUS = #{userStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
