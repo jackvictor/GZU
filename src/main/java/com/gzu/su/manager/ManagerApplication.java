@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableScheduling
-//@MapperScan("com.gzu.su.manager.*.dao")
+@MapperScan("com.gzu.su.manager.*.dao")
 public class ManagerApplication extends SpringBootServletInitializer {
  
 	public static void main(String[] args) {

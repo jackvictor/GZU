@@ -10,22 +10,7 @@
 	<body class="layui-layout-body">
 		<div class="layui-layout layui-layout-admin">
 			<div class="layui-header">
-				<div class="layui-logo">云上方舟管理后台</div>
-				<!-- 头部区域（可配合layui已有的水平导航） -->
-				<!--<ul class="layui-nav layui-layout-left">-->
-				<!--<li class="layui-nav-item"><a href="">控制台</a></li>-->
-				<!--<li class="layui-nav-item"><a href="">商品管理</a></li>-->
-				<!--<li class="layui-nav-item"><a href="">用户</a></li>-->
-				<!--<li class="layui-nav-item">-->
-				<!--<a href="javascript:;">其它系统</a>-->
-				<!--<dl class="layui-nav-child">-->
-				<!--<dd><a href="">邮件管理</a></dd>-->
-				<!--<dd><a href="">消息管理</a></dd>-->
-				<!--<dd><a href="">授权管理</a></dd>-->
-				<!--</dl>-->
-				<!--</li>-->
-				<!--</ul>-->
-
+				<div class="layui-logo">学生会管理</div>
 				<!--右上角头像区域-->
 				<ul class="layui-nav layui-layout-right">
 					<li class="layui-nav-item" style="">
@@ -53,12 +38,9 @@
 					<ul class="layui-nav layui-nav-tree" lay-filter="test">
 						<li class="layui-nav-item layui-nav-itemed">
 							<a href="javascript:;" class="skip" data-url="home/home" data-id="首页" data-title="首页"><i class="layui-icon"></i> 首页</a>
-							<!--<dl class="layui-nav-child">-->
-							<!--<dd><a href="javascript:;">首页</a></dd>-->
-							<!--</dl>-->
 						</li>
 						<li class="layui-nav-item" style="">
-							<a class="" href="javascript:;"><i class="layui-icon"></i> 商家管理<span class="layui-nav-more"></span></a>
+							<a class="" href="javascript:;"><i class="layui-icon"></i> 部门管理<span class="layui-nav-more"></span></a>
 							<dl class="layui-nav-child">
 								<dd>
 									<a href="javascript:;" class="skip" data-url="merchant/merchant_list" data-id="商家列表" data-title="商家列表">商家列表</a>
@@ -69,7 +51,7 @@
 							</dl>
 						</li>
 						<li class="layui-nav-item" style="">
-							<a href="javascript:;"><i class="layui-icon"></i> 活动管理<span class="layui-nav-more"></span></a>
+							<a href="javascript:;"><i class="layui-icon"></i> 事务管理<span class="layui-nav-more"></span></a>
 							<dl class="layui-nav-child">
 								<dd>
 									<a href="javascript:;" class="skip" data-url="promotion/promotion_list" data-id="活动列表" data-title="活动列表">活动列表</a>
@@ -91,7 +73,7 @@
 							</dl>
 						</li>
 						<li class="layui-nav-item" style="">
-							<a href="javascript:;"><i class="layui-icon"></i> 用户管理<span class="layui-nav-more"></span></a>
+							<a href="javascript:;"><i class="layui-icon"></i> 财务管理<span class="layui-nav-more"></span></a>
 							<dl class="layui-nav-child">
 								<dd>
 									<a href="javascript:;" class="skip" data-url="user/user_list" data-id="用户列表" data-title="用户列表">用户列表</a>
@@ -102,7 +84,7 @@
 							</dl>
 						</li>
 						<li class="layui-nav-item layui-nav-itemed" style="">
-							<a href="javascript:;"><i class="layui-icon"></i> 日志管理<span class="layui-nav-more"></span></a>
+							<a href="javascript:;"><i class="layui-icon"></i>文件管理<span class="layui-nav-more"></span></a>
 							<dl class="layui-nav-child">
 								<dd class="">
 									<a href="javascript:;" class="skip" data-url="log/log_list" data-id="日志列表" data-title="日志列表">日志列表</a>
@@ -115,25 +97,6 @@
 								<dd class="">
 									<a href="javascript:;" class="skip" data-url="dictionary/owership_list" data-id="商家标签" data-title="商家标签">商家标签</a>
 								</dd>
-								
-								<dd class="">
-									<a href="javascript:;" class="skip" data-url="dictionary/map_list" data-id="地图楼层" data-title="地图楼层">地图楼层</a>
-								</dd>
-								<dd class="">
-									<a href="javascript:;" class="skip" data-url="dictionary/owership_list" data-id="车牌归属" data-title="车牌归属">车牌归属</a>
-								</dd>
-								<dd class="">
-									<a href="javascript:;" class="skip" data-url="dictionary/promotion_task_list" data-id="优惠活动" data-title="优惠活动">优惠活动</a>
-								</dd>
-								<dd class="">
-									<a href="javascript:;" class="skip" data-url="dictionary/feedback_list" data-id="投诉反馈" data-title="投诉反馈">投诉反馈</a>
-								</dd>
-								<dd class="layui-this">
-									<a href="javascript:;" class="skip" data-url="dictionary/member_list" data-id="会员中心" data-title="会员中心">会员中心</a>
-								</dd>
-								<dd class="">
-									<a href="javascript:;" class="skip" data-url="dictionary/configration_list" data-id="菜单配置" data-title="菜单配置">菜单配置</a>
-								</dd>
 							</dl>
 						</li>
 					<span class="layui-nav-bar" style="top: 332.5px; height: 0px; opacity: 0;"></span></ul>
@@ -145,19 +108,12 @@
 				<div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true" overflow="">
 					<ul class="layui-tab-title">
 						<li class="" lay-id="首页">首页<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li>
-						<!--<li lay-id="1">商家列表</li>
-						<li lay-id="2">用户列表</li>-->
-					<li lay-id="日志列表" class="">日志列表<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li><li lay-id="商家标签" class="">商家标签<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li><li lay-id="地图楼层" class="">地图楼层<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li><li lay-id="车牌归属" class="">车牌归属<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li><li lay-id="优惠活动" class="">优惠活动<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li><li lay-id="投诉反馈" class="">投诉反馈<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li><li lay-id="会员中心" class="layui-this">会员中心<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li><li lay-id="菜单配置" class="">菜单配置<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li><span class="layui-unselect layui-tab-bar" lay-stope="tabmore"><i lay-stope="tabmore" class="layui-icon"></i></span></ul>
+
+					<i lay-stope="tabmore" class="layui-icon"></i></span></ul>
 					<div class="layui-tab-content">
 						<div class="layui-tab-item">
 							<iframe src="home/home.html" scrolling="yes" width="100%" height="100%" frameborder="0"></iframe>
 						</div>
-						<!--<div class="layui-tab-item layui-show">
-							<iframe src="user/user_info.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
-						</div>
-						<div class="layui-tab-item layui-show">
-							<iframe src="user/user_list.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
-						</div>-->
 					<div class="layui-tab-item"><iframe data-frameid="日志列表" scrolling="auto" src="log/log_list.html" style="width:100%;height:99%;" frameborder="0"></iframe></div><div class="layui-tab-item"><iframe data-frameid="商家标签" scrolling="auto" src="dictionary/map_list.html" style="width:100%;height:99%;" frameborder="0"></iframe></div><div class="layui-tab-item"><iframe data-frameid="地图楼层" scrolling="auto" src="dictionary/map_list.html" style="width:100%;height:99%;" frameborder="0"></iframe></div><div class="layui-tab-item"><iframe data-frameid="车牌归属" scrolling="auto" src="dictionary/owership_list.html" style="width:100%;height:99%;" frameborder="0"></iframe></div><div class="layui-tab-item"><iframe data-frameid="优惠活动" scrolling="auto" src="dictionary/promotion_task_list.html" style="width:100%;height:99%;" frameborder="0"></iframe></div><div class="layui-tab-item"><iframe data-frameid="投诉反馈" scrolling="auto" src="dictionary/feedback_list.html" style="width:100%;height:99%;" frameborder="0"></iframe></div><div class="layui-tab-item layui-show"><iframe data-frameid="会员中心" scrolling="auto" src="dictionary/member_list.html" style="width:100%;height:99%;" frameborder="0"></iframe></div><div class="layui-tab-item"><iframe data-frameid="菜单配置" scrolling="auto" src="dictionary/configration_list.html" style="width:100%;height:99%;" frameborder="0"></iframe></div></div>
 				</div>
 			</div>

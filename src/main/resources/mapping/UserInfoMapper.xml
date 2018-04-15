@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzu.su.manager.user.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gzu.su.manager.user.model.UserInfo">
+  <id column="ID" jdbcType="VARCHAR" property="id" />
+  <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+  <result column="ENCRYPT_PASSWORD" jdbcType="VARCHAR" property="encryptPassword" />
+  <result column="RANDOM_SALT" jdbcType="VARCHAR" property="randomSalt" />
+  <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+  <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+  <result column="USER_SEX" jdbcType="VARCHAR" property="userSex" />
+  <result column="USER_POSITION" jdbcType="VARCHAR" property="userPosition" />
+  <result column="USER_DEPARTMENT_NAME" jdbcType="VARCHAR" property="userDepartmentName" />
+  <result column="USER_MAJOR" jdbcType="VARCHAR" property="userMajor" />
+  <result column="USER_GRADE" jdbcType="VARCHAR" property="userGrade" />
+  <result column="E_MAIL" jdbcType="VARCHAR" property="eMail" />
+  <result column="USER_PHONE_NU" jdbcType="VARCHAR" property="userPhoneNu" />
+  <result column="USER_START_TIME" jdbcType="TIMESTAMP" property="userStartTime" />
+  <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  <result column="USER_STATUS" jdbcType="VARCHAR" property="userStatus" />
+</resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, ENCRYPT_PASSWORD, RANDOM_SALT, USER_NAME, ROLE_ID, USER_SEX, USER_POSITION, 
+    USER_DEPARTMENT_NAME, USER_MAJOR, USER_GRADE, E_MAIL, USER_PHONE_NU, USER_START_TIME, 
+    CREATE_TIME, UPDATE_TIME, USER_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gzusu_manager_user_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from gzusu_manager_user_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gzu.su.manager.user.model.UserInfo">
+    insert into gzusu_manager_user_info (ID, USER_ID, ENCRYPT_PASSWORD, 
+      RANDOM_SALT, USER_NAME, ROLE_ID, 
+      USER_SEX, USER_POSITION, USER_DEPARTMENT_NAME, 
+      USER_MAJOR, USER_GRADE, E_MAIL, 
+      USER_PHONE_NU, USER_START_TIME, CREATE_TIME, 
+      UPDATE_TIME, USER_STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{encryptPassword,jdbcType=VARCHAR}, 
+      #{randomSalt,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
+      #{userSex,jdbcType=VARCHAR}, #{userPosition,jdbcType=VARCHAR}, #{userDepartmentName,jdbcType=VARCHAR}, 
+      #{userMajor,jdbcType=VARCHAR}, #{userGrade,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, 
+      #{userPhoneNu,jdbcType=VARCHAR}, #{userStartTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gzu.su.manager.user.model.UserInfo">
+    insert into gzusu_manager_user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="encryptPassword != null">
+        ENCRYPT_PASSWORD,
+      </if>
+      <if test="randomSalt != null">
+        RANDOM_SALT,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="userSex != null">
+        USER_SEX,
+      </if>
+      <if test="userPosition != null">
+        USER_POSITION,
+      </if>
+      <if test="userDepartmentName != null">
+        USER_DEPARTMENT_NAME,
+      </if>
+      <if test="userMajor != null">
+        USER_MAJOR,
+      </if>
+      <if test="userGrade != null">
+        USER_GRADE,
+      </if>
+      <if test="eMail != null">
+        E_MAIL,
+      </if>
+      <if test="userPhoneNu != null">
+        USER_PHONE_NU,
+      </if>
+      <if test="userStartTime != null">
+        USER_START_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="userStatus != null">
+        USER_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptPassword != null">
+        #{encryptPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="randomSalt != null">
+        #{randomSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null">
+        #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="userDepartmentName != null">
+        #{userDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMajor != null">
+        #{userMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="userGrade != null">
+        #{userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null">
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoneNu != null">
+        #{userPhoneNu,jdbcType=VARCHAR},
+      </if>
+      <if test="userStartTime != null">
+        #{userStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gzu.su.manager.user.model.UserInfo">
+    update gzusu_manager_user_info
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptPassword != null">
+        ENCRYPT_PASSWORD = #{encryptPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="randomSalt != null">
+        RANDOM_SALT = #{randomSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        USER_SEX = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null">
+        USER_POSITION = #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="userDepartmentName != null">
+        USER_DEPARTMENT_NAME = #{userDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMajor != null">
+        USER_MAJOR = #{userMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="userGrade != null">
+        USER_GRADE = #{userGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null">
+        E_MAIL = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoneNu != null">
+        USER_PHONE_NU = #{userPhoneNu,jdbcType=VARCHAR},
+      </if>
+      <if test="userStartTime != null">
+        USER_START_TIME = #{userStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null">
+        USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gzu.su.manager.user.model.UserInfo">
+    update gzusu_manager_user_info
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      ENCRYPT_PASSWORD = #{encryptPassword,jdbcType=VARCHAR},
+      RANDOM_SALT = #{randomSalt,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=VARCHAR},
+      USER_SEX = #{userSex,jdbcType=VARCHAR},
+      USER_POSITION = #{userPosition,jdbcType=VARCHAR},
+      USER_DEPARTMENT_NAME = #{userDepartmentName,jdbcType=VARCHAR},
+      USER_MAJOR = #{userMajor,jdbcType=VARCHAR},
+      USER_GRADE = #{userGrade,jdbcType=VARCHAR},
+      E_MAIL = #{eMail,jdbcType=VARCHAR},
+      USER_PHONE_NU = #{userPhoneNu,jdbcType=VARCHAR},
+      USER_START_TIME = #{userStartTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      USER_STATUS = #{userStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <resultMap id="UserPageMap" type="com.gzu.su.manager.user.model.UserInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="USER_SEX" jdbcType="VARCHAR" property="userSex" />
+    <result column="USER_POSITION" jdbcType="VARCHAR" property="userPosition" />
+    <result column="USER_DEPARTMENT_NAME" jdbcType="VARCHAR" property="userDepartmentName" />
+    <result column="USER_MAJOR" jdbcType="VARCHAR" property="userMajor" />
+    <result column="USER_GRADE" jdbcType="VARCHAR" property="userGrade" />
+    <result column="E_MAIL" jdbcType="VARCHAR" property="eMail" />
+    <result column="USER_PHONE_NU" jdbcType="VARCHAR" property="userPhoneNu" />
+    <result column="USER_START_TIME" jdbcType="TIMESTAMP" property="userStartTime" />
+    <result column="USER_STATUS" jdbcType="VARCHAR" property="userStatus" />
+    <association property="userRoleMid" javaType="com.gzu.su.manager.user.model.RoleFunMid">
+      <result column="roleName" property="roleName"/>
+    </association>
+  </resultMap>
+  <select id="findByPage" resultMap="UserPageMap">
+    select
+    a.ID,
+    a.USER_ID,
+    a.ROLE_ID,
+    a.USER_NAME,
+    ur.ROLE_NAME,
+    a.USER_POSITION,
+    a.USER_DEPARTMENT_NAME,
+    a.USER_MAJOR,
+    a.USER_GRADE,
+    a.E_MAIL,
+    a.USER_PHONE_NU,
+    a.USER_START_TIME,
+    a.USER_STATUS
+    from (
+    SELECT
+    ui.ID,
+    ui.USER_ID,
+    ui.ROLE_ID,
+    ui.USER_NAME,
+    ui.USER_POSITION,
+    ui.USER_DEPARTMENT_NAME,
+    ui.USER_MAJOR,
+    ui.USER_GRADE,
+    ui.E_MAIL,
+    ui.USER_PHONE_NU,
+    ui.USER_START_TIME,
+    ui.USER_STATUS
+    FROM
+    gzusu_manager_user_info ui
+    WHERE
+    ui.USER_ID != #{sysUser}
+    and ui.ID != #{uId}
+    <if test="userName !=null and userName != ''">
+      and ui.USER_NAME LIKE CONCAT('%',#{uName},'%')
+      OR ui.USER_DEPARTMENT_NAME LIKE CONCAT('%',#{uName},'%')
+      OR ui.USER_POSITION LIKE CONCAT('%',#{uName},'%')
+      OR ui.USER_PHONE_NU LIKE CONCAT('%',#{uName},'%')
+    </if>
+    )a,
+    gzusu_manager_user_role_mid ur
+    WHERE a.ROLE_ID = ur.ID
+    order by UPDATE_TIME DESC
+    LIMIT #{startNum},#{size}
+  </select>
+
+  <select id="findByPageCount" resultType="java.lang.Integer">
+    SELECT
+    COUNT(u.ID)
+    FROM(
+    SELECT
+    ui.ID,
+    ui.USER_ID,
+    ui.ROLE_ID,
+    ui.USER_NAME,
+    ui.USER_POSITION,
+    ui.USER_DEPARTMENT_NAME,
+    ui.USER_MAJOR,
+    ui.USER_GRADE,
+    ui.E_MAIL,
+    ui.USER_PHONE_NU,
+    ui.USER_START_TIME,
+    ui.USER_STATUS
+    FROM
+    gzusu_manager_user_info ui
+    WHERE
+    ui.USER_ID != #{sysUser}
+    and ui.ID != #{uId}
+    <if test="userName !=null and userName != ''">
+      and ui.USER_NAME LIKE CONCAT('%',#{uName},'%')
+      OR ui.USER_DEPARTMENT_NAME LIKE CONCAT('%',#{uName},'%')
+      OR ui.USER_POSITION LIKE CONCAT('%',#{uName},'%')
+      OR ui.USER_PHONE_NU LIKE CONCAT('%',#{uName},'%')
+    </if>
+    )u
+  </select>
+
+  <select id="loginCheckUserName" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    FROM su_manager.gzusu_manager_user_info
+    WHERE USER_ID = #{userId}
+  </select>
+</mapper>

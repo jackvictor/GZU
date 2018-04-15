@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>云上贵州后台管理平台</title>
+		<script>
+	        if (window != window.top) top.location.href = self.location.href;
+	    </script>
+	    <link href="/static/layui/css/layui.css" rel="stylesheet" />
+	    <link href="/static/css/login/font-awesome.css" rel="stylesheet" />
+	    <link href="/static/css/login/login.css" rel="stylesheet" />
+	    <link href="/static/css/login/normalize.css" rel="stylesheet" />
+	    <link href="/static/css/login/demo.css" rel="stylesheet" />
+	    <link href="/static/css/login/component.css" rel="stylesheet" />
+		<style>
+	        canvas {
+	            position: absolute;
+	            z-index: -1;
+	        }
+	        
+	        .kit-login-box header h1 {
+	            line-height: normal;
+	        }
+	        
+	        .kit-login-box header {
+	            height: auto;
+	        }
+	        
+	        .content {
+	            position: relative;
+	        }
+	        
+	        .codrops-demos {
+	            position: absolute;
+	            bottom: 0;
+	            left: 40%;
+	            z-index: 10;
+	        }
+	        
+	        .codrops-demos a {
+	            border: 2px solid rgba(242, 242, 242, 0.41);
+	            color: rgba(255, 255, 255, 0.51);
+	        }
+	        
+	        .kit-pull-right button,
+	        .kit-login-main .layui-form-item input {
+	            background-color: transparent;
+	            color: white;
+	        }
+	        
+	        .kit-login-main .layui-form-item input::-webkit-input-placeholder {
+	            color: white;
+	        }
+	        
+	        .kit-login-main .layui-form-item input:-moz-placeholder {
+	            color: white;
+	        }
+	        
+	        .kit-login-main .layui-form-item input::-moz-placeholder {
+	            color: white;
+	        }
+	        
+	        .kit-login-main .layui-form-item input:-ms-input-placeholder {
+	            color: white;
+	        }
+	        
+	        .kit-pull-right button:hover {
+	            border-color: #009688;
+	            color: #009688
+	        }
+	    </style>
+	</head>
+	
+	<body class="layui-card-body" style="padding:0px;">
+		<div class="container demo-1">
+	        <div class="content">
+	            <div id="large-header" class="large-header">
+	                <canvas id="demo-canvas"></canvas>
+	                <div class="kit-login-box">
+	                    <header>
+	                        <h1>找回密码</h1>
+	                    </header>
+	                    <div class="kit-login-main">
+	                        <form action="/" class="layui-form" method="post">
+	                            <div class="layui-form-item">
+	                                <label class="kit-login-icon">
+	                                    <i class="layui-icon">&#xe612;</i>
+	                                </label>
+	                                <input type="text" name="userId" lay-verify="userId" autocomplete="off" placeholder="请输入用户名" class="layui-input" id="user_id">
+	                            </div>
+	                            <div class="layui-form-item">
+	                            	<div class="kit-pull-left kit-login-remember">
+	                                    <a class="layui-btn layui-btn-primary" id="return_login" style="background-color: transparent;color: white;" href="tologin" title="返回登录" >返回登录</a>
+	                                </div>
+	                                <div class="kit-pull-right">
+	                                    <button class="layui-btn layui-btn-primary" lay-submit lay-filter="sendEmail">重置密码</button>
+	                                </div>
+	                                <div class="kit-clear"></div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                    <footer>
+	                        <p><!--KIT ADMIN © <a href="http://blog.zhengjinfan.cn" style="color:white; font-size:18px;" target="_blank">www.zhengjinfan.cn</a>--></p>
+	                    </footer>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    
+		<script src="/static/layui/layui.js"></script>
+		<script src="/static/js/tl.js"></script>
+		<script src="/static/js/EasePack.min.js"></script>
+		<script src="/static/js/demoj.js"></script>
+		<script src="/static/management/login/email.js"></script>
+	</body>
+</html>

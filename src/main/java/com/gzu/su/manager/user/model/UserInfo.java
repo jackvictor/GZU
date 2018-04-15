@@ -1,15 +1,19 @@
-package com.gzu.su.manager.model;
+package com.gzu.su.manager.user.model;
 
-public class User {
+import java.util.Date;
+
+public class UserInfo {
     private String id;
 
     private String userId;
 
-    private String password;
+    private String encryptPassword;
 
-    private String redoomSalt;
+    private String randomSalt;
 
     private String userName;
+
+    private String roleId;
 
     private String userSex;
 
@@ -25,11 +29,11 @@ public class User {
 
     private String userPhoneNu;
 
-    private String userStartTime;
+    private Date userStartTime;
 
-    private String createTime;
+    private Date createTime;
 
-    private String updateTime;
+    private Date updateTime;
 
     private String userStatus;
 
@@ -49,20 +53,20 @@ public class User {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getEncryptPassword() {
+        return encryptPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setEncryptPassword(String encryptPassword) {
+        this.encryptPassword = encryptPassword == null ? null : encryptPassword.trim();
     }
 
-    public String getRedoomSalt() {
-        return redoomSalt;
+    public String getRandomSalt() {
+        return randomSalt;
     }
 
-    public void setRedoomSalt(String redoomSalt) {
-        this.redoomSalt = redoomSalt == null ? null : redoomSalt.trim();
+    public void setRandomSalt(String randomSalt) {
+        this.randomSalt = randomSalt == null ? null : randomSalt.trim();
     }
 
     public String getUserName() {
@@ -71,6 +75,14 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 
     public String getUserSex() {
@@ -129,28 +141,28 @@ public class User {
         this.userPhoneNu = userPhoneNu == null ? null : userPhoneNu.trim();
     }
 
-    public String getUserStartTime() {
+    public Date getUserStartTime() {
         return userStartTime;
     }
 
-    public void setUserStartTime(String userStartTime) {
-        this.userStartTime = userStartTime == null ? null : userStartTime.trim();
+    public void setUserStartTime(Date userStartTime) {
+        this.userStartTime = userStartTime;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime == null ? null : updateTime.trim();
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public String getUserStatus() {
