@@ -103,4 +103,31 @@
       ROLE_STATUS = #{roleStatus,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="findByPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from gzusu_manager_user_role_mid
+    <if test="rName != null and rName != ''" >
+      where ROLE_NAME LIKE CONCAT('%',#{rName},'%')
+    </if>
+    order by UPDATE_TIME desc
+    limit #{startNum},#{size}
+  </select>
+  <select id="findByPageCount" resultType="java.lang.Integer">
+    select COUNT(ur.ID) from gzusu_manager_user_role_mid ur
+    <if test="rName != null and rName != ''" >
+      where ur.ROLE_NAME LIKE CONCAT('%',#{rName},'%')
+    </if>
+  </select>
+  <select id="findUserCountByRoleId" resultType="java.lang.Integer">
+    select COUNT(ui.ID) from gzusu_manager_user_info ui
+    where ui.ROLE_ID = #{rId}
+  </select>
+  <select id="findAllRoles" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from gzusu_manager_user_role_mid
+    where ROLE_STATUS = "0"
+  </select>
 </mapper>

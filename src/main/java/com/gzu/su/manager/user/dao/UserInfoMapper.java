@@ -19,17 +19,27 @@ public interface UserInfoMapper {
 
     int updateByPrimaryKey(UserInfo record);
 
+    /**
+     *
+     *
+     * @param startNum
+     * @param size
+     * @param uName
+     * @param sysuser
+     * @param uId
+     * @return
+     * @throws Exception
+     */
     List<UserPage> findByPage(@Param("startNum")Integer startNum, @Param("size")Integer size, @Param("uName")String uName, @Param("sysUser")String sysuser, @Param("uId")String uId) throws Exception;
 
     /**
+     *获取总页数
      *
-     * @param uName 用户名
-     * @return 总数
+     * @param uName
+     * @param sysuser
+     * @param uId
+     * @return
      * @throws Exception
-     * @returnType Integer
-     * @author luoxia
-     * @date Mar 30, 201810:15:52 AM
-     * @Des 获取页面总条数
      */
     Integer findByPageCount(@Param("uName")String uName,@Param("sysUser")String sysuser,@Param("uId")String uId) throws Exception;
 

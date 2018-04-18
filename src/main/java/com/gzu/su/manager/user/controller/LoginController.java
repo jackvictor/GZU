@@ -3,18 +3,23 @@ package com.gzu.su.manager.user.controller;
 import com.gzu.su.manager.common.response.Constants;
 import com.gzu.su.manager.common.response.MapResult;
 import com.gzu.su.manager.common.security.SessionInterceptor;
+import com.gzu.su.manager.user.model.SysFun;
+import com.gzu.su.manager.user.model.UserInfo;
 import com.gzu.su.manager.user.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author: jack.ye
@@ -70,6 +75,21 @@ public class LoginController {
             log.error(e.getMessage(),e);
             return MapResult.ok(Constants.ERROR_CODE_SYSTEM, "登录失败");
         }
+    }
+
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(@SessionAttribute(SessionInterceptor.SESSION_KEY) UserInfo userInfo, Model model) {
+        try {
+//            List<SysFun> roleList = sysFunService.findByRoleId(userInfo.getRoleId());
+//            model.addAttribute("user_account", userInfo);
+//            model.addAttribute("role_list", roleList);
+            return "index";
+        } catch (Exception e) {
+            log.error(e.getMessage(),e);
+            return "404";
+        }
+
     }
 
 }

@@ -21,12 +21,12 @@
   <result column="USER_STATUS" jdbcType="VARCHAR" property="userStatus" />
 </resultMap>
   <sql id="Base_Column_List">
-    ID, USER_ID, ENCRYPT_PASSWORD, RANDOM_SALT, USER_NAME, ROLE_ID, USER_SEX, USER_POSITION, 
-    USER_DEPARTMENT_NAME, USER_MAJOR, USER_GRADE, E_MAIL, USER_PHONE_NU, USER_START_TIME, 
+    ID, USER_ID, ENCRYPT_PASSWORD, RANDOM_SALT, USER_NAME, ROLE_ID, USER_SEX, USER_POSITION,
+    USER_DEPARTMENT_NAME, USER_MAJOR, USER_GRADE, E_MAIL, USER_PHONE_NU, USER_START_TIME,
     CREATE_TIME, UPDATE_TIME, USER_STATUS
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from gzusu_manager_user_info
     where ID = #{id,jdbcType=VARCHAR}
@@ -36,17 +36,17 @@
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.gzu.su.manager.user.model.UserInfo">
-    insert into gzusu_manager_user_info (ID, USER_ID, ENCRYPT_PASSWORD, 
-      RANDOM_SALT, USER_NAME, ROLE_ID, 
-      USER_SEX, USER_POSITION, USER_DEPARTMENT_NAME, 
-      USER_MAJOR, USER_GRADE, E_MAIL, 
-      USER_PHONE_NU, USER_START_TIME, CREATE_TIME, 
+    insert into gzusu_manager_user_info (ID, USER_ID, ENCRYPT_PASSWORD,
+      RANDOM_SALT, USER_NAME, ROLE_ID,
+      USER_SEX, USER_POSITION, USER_DEPARTMENT_NAME,
+      USER_MAJOR, USER_GRADE, E_MAIL,
+      USER_PHONE_NU, USER_START_TIME, CREATE_TIME,
       UPDATE_TIME, USER_STATUS)
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{encryptPassword,jdbcType=VARCHAR}, 
-      #{randomSalt,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
-      #{userSex,jdbcType=VARCHAR}, #{userPosition,jdbcType=VARCHAR}, #{userDepartmentName,jdbcType=VARCHAR}, 
-      #{userMajor,jdbcType=VARCHAR}, #{userGrade,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, 
-      #{userPhoneNu,jdbcType=VARCHAR}, #{userStartTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{encryptPassword,jdbcType=VARCHAR},
+      #{randomSalt,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR},
+      #{userSex,jdbcType=VARCHAR}, #{userPosition,jdbcType=VARCHAR}, #{userDepartmentName,jdbcType=VARCHAR},
+      #{userMajor,jdbcType=VARCHAR}, #{userGrade,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR},
+      #{userPhoneNu,jdbcType=VARCHAR}, #{userStartTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gzu.su.manager.user.model.UserInfo">

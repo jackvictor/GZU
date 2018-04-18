@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzu.su.manager.goods.dao.GoodsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gzu.su.manager.goods.model.GoodsInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName" />
+    <result column="GOODS_BUY_TIME" jdbcType="TIMESTAMP" property="goodsBuyTime" />
+    <result column="GOODS_PRICE" jdbcType="VARCHAR" property="goodsPrice" />
+    <result column="GOODS_LENDER" jdbcType="VARCHAR" property="goodsLender" />
+    <result column="GOODS_RETURNER" jdbcType="VARCHAR" property="goodsReturner" />
+    <result column="LEND_TIME" jdbcType="TIMESTAMP" property="lendTime" />
+    <result column="RETURN_TIME" jdbcType="TIMESTAMP" property="returnTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, GOODS_NAME, GOODS_BUY_TIME, GOODS_PRICE, GOODS_LENDER, GOODS_RETURNER, LEND_TIME, 
+    RETURN_TIME, CREATE_TIME, UPDATE_TIME, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gzusu_manager_goods_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from gzusu_manager_goods_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gzu.su.manager.goods.model.GoodsInfo">
+    insert into gzusu_manager_goods_info (ID, GOODS_NAME, GOODS_BUY_TIME, 
+      GOODS_PRICE, GOODS_LENDER, GOODS_RETURNER, 
+      LEND_TIME, RETURN_TIME, CREATE_TIME, 
+      UPDATE_TIME, STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{goodsBuyTime,jdbcType=TIMESTAMP}, 
+      #{goodsPrice,jdbcType=VARCHAR}, #{goodsLender,jdbcType=VARCHAR}, #{goodsReturner,jdbcType=VARCHAR}, 
+      #{lendTime,jdbcType=TIMESTAMP}, #{returnTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gzu.su.manager.goods.model.GoodsInfo">
+    insert into gzusu_manager_goods_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="goodsName != null">
+        GOODS_NAME,
+      </if>
+      <if test="goodsBuyTime != null">
+        GOODS_BUY_TIME,
+      </if>
+      <if test="goodsPrice != null">
+        GOODS_PRICE,
+      </if>
+      <if test="goodsLender != null">
+        GOODS_LENDER,
+      </if>
+      <if test="goodsReturner != null">
+        GOODS_RETURNER,
+      </if>
+      <if test="lendTime != null">
+        LEND_TIME,
+      </if>
+      <if test="returnTime != null">
+        RETURN_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBuyTime != null">
+        #{goodsBuyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsLender != null">
+        #{goodsLender,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsReturner != null">
+        #{goodsReturner,jdbcType=VARCHAR},
+      </if>
+      <if test="lendTime != null">
+        #{lendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnTime != null">
+        #{returnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gzu.su.manager.goods.model.GoodsInfo">
+    update gzusu_manager_goods_info
+    <set>
+      <if test="goodsName != null">
+        GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBuyTime != null">
+        GOODS_BUY_TIME = #{goodsBuyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsPrice != null">
+        GOODS_PRICE = #{goodsPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsLender != null">
+        GOODS_LENDER = #{goodsLender,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsReturner != null">
+        GOODS_RETURNER = #{goodsReturner,jdbcType=VARCHAR},
+      </if>
+      <if test="lendTime != null">
+        LEND_TIME = #{lendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnTime != null">
+        RETURN_TIME = #{returnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gzu.su.manager.goods.model.GoodsInfo">
+    update gzusu_manager_goods_info
+    set GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      GOODS_BUY_TIME = #{goodsBuyTime,jdbcType=TIMESTAMP},
+      GOODS_PRICE = #{goodsPrice,jdbcType=VARCHAR},
+      GOODS_LENDER = #{goodsLender,jdbcType=VARCHAR},
+      GOODS_RETURNER = #{goodsReturner,jdbcType=VARCHAR},
+      LEND_TIME = #{lendTime,jdbcType=TIMESTAMP},
+      RETURN_TIME = #{returnTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="findByPage" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+     gzusu_manager_goods_info
+    <if test="gName != null and gName != ''">
+      WHERE
+      GOODS_NAME LIKE CONCAT('%',#{gName,jdbcType=VARCHAR},'%')
+      OR
+      GOODS_LENDER LIKE CONCAT('%',#{gName,jdbcType=VARCHAR},'%')
+      OR
+      GOODS_RETURNER LIKE CONCAT('%',#{gName,jdbcType=VARCHAR},'%')
+    </if>
+    order by UPDATE_TIME DESC
+    LIMIT #{startNum},#{size}
+  </select>
+  <select id="findByPageCount" resultType="java.lang.Integer">
+    SELECT
+    COUNT(g.ID)
+    FROM (
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+     gzusu_manager_goods_info
+    <if test="gName != null and gName != ''">
+      WHERE
+      GOODS_NAME LIKE CONCAT('%',#{gName,jdbcType=VARCHAR},'%')
+      OR
+      GOODS_LENDER LIKE CONCAT('%',#{gName,jdbcType=VARCHAR},'%')
+      OR
+      GOODS_RETURNER  LIKE CONCAT('%',#{gName,jdbcType=VARCHAR},'%')
+    </if>
+    )g
+  </select>
+</mapper>

@@ -16,5 +16,5 @@ public interface EmailService {
 	 * @date Apr 12, 20184:21:21 PM  
 	 * @Des 发送邮件
 	 */
-	public int sendSimpleMail(String sendTo, String userId) throws Exception;
+	int sendSimpleMail(String sendTo, String userId) throws Exception;
 }
