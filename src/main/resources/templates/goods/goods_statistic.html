@@ -8,8 +8,8 @@
     <script src="/static/layui/layui.all.js" type="text/javascript" charset="UTF-8"></script>
     <title>物品信息</title>
     <script type="text/html" id="barTpl">
-        <a class="layui-btn  layui-btn-xs " lay-event="edit">借记</a>
-        <a class="layui-btn  layui-btn-xs " lay-event="edit">归还</a>
+        <a class="layui-btn  layui-btn-xs " onclick="do_lend('{{d.id}}','lend')">借记</a>
+        <a class="layui-btn  layui-btn-xs " onclick="do_lend('{{d.id}}','return')">归还</a>
     </script>
     <style>
         .search{
@@ -25,7 +25,7 @@
 <body class="layui-card-body">
 <div class="layui-row">
     <div class="layui-col-xs8">
-
+        &nbsp;
     </div>
     <div class="layui-col-xs4 search" >
 				<span class=" layui-inline">

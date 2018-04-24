@@ -13,7 +13,7 @@ layui.use(['table', 'form', 'layer'], function () {
                 field: 'goodsName',
                 sort: false,
                 title: '物品名称',
-                width: '10%'
+                width: '12%'
             },
             {
                 field: 'goodsPrice',
@@ -25,29 +25,29 @@ layui.use(['table', 'form', 'layer'], function () {
                 field: 'goodsLender',
                 sort: false,
                 title: '借物人',
-                width: '10%'
+                width: '12%'
             },
             {
                 field: 'goodsReturner',
                 sort: false,
                 title: '还物人',
-                width: '10%'
+                width: '12%'
             }, {
                 field: 'lendTime',
                 sort: false,
                 title: '借出时间',
-                width: '15%'
+                width: '12%'
             },
             {
                 field: 'returnTime',
                 sort: false,
                 title: '归还时间',
-                width: '15%'
+                width: '12%'
             },
             {
-                field: 'status',
+                field: 'goodsMargin',
                 sort: false,
-                title: '物品状态',
+                title: '物品余量',
                 width: '10%'
             },
             {
@@ -67,64 +67,6 @@ layui.use(['table', 'form', 'layer'], function () {
             $("#doSearch").trigger("click");
         }
     });
-    //弹出增加框
-    $("#goods_add").on("click", function () {
-        layer.open({
-            type: 2,
-            title: '添加标签',
-            area: ['600px', '400px'],
-            fixed: false,
-            content: '/feedback/info'
-
-        });
-    });
-    //监听工具条
-    table.on('tool(table)', function (obj) {
-        var data = obj.data;
-        if (obj.event === 'del') {
-            layer.confirm('真的删除行么', function (index) {
-                layer.load(1);
-                $.ajax({
-                    type: "POST",
-                    url: "/feedback/delete",
-                    data:data,
-                    timeout: 10000,
-                    success: function (data) {
-                        layer.closeAll('loading');
-                        if(data != undefined && data != "") {
-                            if (data.code == 200) {
-                                layer.msg(data.msg, {icon: 1});
-                                layui.table.reload('table', {
-                                    done: function(res, curr, count){
-                                        if(res.data.length < 1 && curr != 1){
-                                            layui.table.reload('table', {page: { curr: (curr - 1)}});
-                                        }
-                                    }
-                                });
-                            } else {
-                                layer.msg(data.msg, {icon: 2});
-                            }
-                        }
-                    },
-                    error: function(xhr, status, info){
-                        layer.closeAll('loading');
-                        layer.msg('网络异常，请刷新页面',{icon: 2});
-                    }
-                });
-                layer.close(index);
-            });
-
-
-        } else if (obj.event === 'edit') {
-            layer.open({
-                type: 2,
-                title: '修改标签',
-                area: ['600px', '400px'],
-                fixed: false,
-                content: '/feedback/updateInfo?pageId='+data.pageId
-            });
-        }
-    });
 })
 
 //搜索实现
@@ -133,6 +75,26 @@ function doSearch() {
     layui.table.reload('table', {
         where: {searchName: value},
         page: {curr: 1}
+    });
+}
+
+function do_lend(pid,sign){
+    var open_height = Math.round($(parent.document.getElementsByClassName("layui-tab-content")[0]).height() * 0.83);
+    var url = '/goods/lend_return?pid='+pid+'&sign='+sign;
+    var title = '';
+
+    if(sign == "lend"){
+        title = '修改物品';
+    }
+
+    layer.open({
+        type: 2,
+        title:title,
+        fixed: false, //不固定
+        area:['100%', open_height+'px'],
+        offset: ['0px', '0px'],
+        content: url
+
     });
 }
 

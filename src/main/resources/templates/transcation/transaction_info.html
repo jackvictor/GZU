@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事务活动</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+</head>
+
+<body class="layui-card-body">
+<input type="hidden" th:value="${showsign}" id="page_sign">
+
+<span th:if="${showsign} eq 'edit' or ${showsign} eq 'show'">
+			<input type="hidden" id="h_start_date" th:value="${promotion.promotionBegin}">
+			<input type="hidden" id="h_end_date" th:value="${promotion.promotionFinish}">
+		</span>
+
+<form class="layui-form" action="">
+    <input type="hidden" th:value="${promotion.id}" name="id" id="pid">
+    <div class="layui-form-item">
+        <label class="layui-form-label">活动名称</label>
+        <div class="layui-input-block" th:if="${showsign} eq 'add'">
+            <input type="text" id="promotionName" name="promotionName" lay-verify="promotionName" autocomplete="off" placeholder="请输入活动名称" class="layui-input">
+        </div>
+        <div class="layui-input-block" th:if="${showsign} eq 'show'">
+            <input type="text" name="title" autocomplete="off" th:placeholder="${promotion.promotionName}" class="layui-input" readonly="readonly">
+        </div>
+        <div class="layui-input-block" th:if="${showsign} eq 'edit'">
+            <input type="text" id="promotionName" name="promotionName" lay-verify="promotionName" autocomplete="off" th:value="${promotion.promotionName}" placeholder="请输入" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">活动图片</label>
+        <div class="layui-input-block" th:if="${showsign} eq 'add'">
+            <div id="img-list" style="height: 120px;"></div>
+            <button type="button" class="layui-btn" id="promotion_upload">
+                <i class="layui-icon">&#xe67c;</i>上传图片
+            </button>
+            <span class="layui-word-aux">尺寸：1080*1920；大小：&lt;4M；格式：JPG、PNG</span>
+        </div>
+        <div class="layui-input-block" th:if="${showsign} eq 'show'">
+            <div id="img-list" style="height: 120px;">
+                <img style="height: 120px;width: 120px;" class="upload-img" th:src="${imgDomain} + ${promotion.promotionImg}" th:value="${promotion.promotionImg}">
+            </div>
+        </div>
+        <div class="layui-input-block" th:if="${showsign} eq 'edit'">
+            <div id="img-list" style="height: 120px;">
+                <img style="height: 120px;width: 120px;" class="img-outer" th:src="${imgDomain} + ${promotion.promotionImg}" th:value="${promotion.promotionImg}"><i class="layui-icon img-del">&#x1006;</i>
+                <input type="hidden" th:value="${promotion.promotionImgmin}" name="promotionImgMin">
+            </div>
+            <button type="button" class="layui-btn" id="promotion_upload">
+                <i class="layui-icon">&#xe67c;</i>上传图片
+            </button>
+            <span class="layui-word-aux">尺寸：1080*1920；大小：&lt;4M；格式：JPG、PNG</span>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">活动时间</label>
+            <div style="width:330px;" class="layui-input-block" th:if="${showsign} eq 'add'">
+                <input type="text" name="promotionDate" id="promotion_date" lay-verify="promotion_date" placeholder="yyyy-MM-dd HH:mm:ss ~ yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+            </div>
+            <div style="width:300px;" class="layui-input-block" th:if="${showsign} eq 'show'">
+                <input type="text" name="date" id="show_promotion_date" autocomplete="off" class="layui-input" readonly="readonly">
+            </div>
+            <div style="width:300px;" class="layui-input-block" th:if="${showsign} eq 'edit'">
+                <input type="text" name="promotionDate" id="promotion_date" lay-verify="promotion_date" placeholder="yyyy-MM-dd HH:mm:ss ~ yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" id="promotion_merchant">
+        <div>
+            <label class="layui-form-label">活动商家</label>
+            <div class="layui-input-block" th:if="${showsign} eq 'add'">
+                <button id="promotion_iframe" type="button" class="layui-btn "><i class="layui-icon">&#xe620;</i>增加商家</button>
+                <span id="merchant_list"></span>
+            </div>
+            <div class="layui-input-block" th:if="${showsign} eq 'show'">
+						<span th:each="mer : ${promotion.merchantInfos}">
+							<button th:text="${mer.merchantName}" class="layui-btn layui-btn-sm layui-btn-disabled" disabled style="background-color: #5FB878;color:#FBFBFB;"></button>
+						</span>
+            </div>
+            <div class="layui-input-block" th:if="${showsign} eq 'edit'">
+                <button id="promotion_iframe" type="button" class="layui-btn "><i class="layui-icon">&#xe620;</i>增加商家</button>
+                <span id="merchant_list">
+							<span th:each="mer : ${promotion.merchantInfos}">
+								<!-- <input type="checkbox" th:title="${mer.merchantName}" th:value="${mer.id}" checked disabled="disabled"> -->
+								<button th:text="${mer.merchantName}" th:value="${mer.id}" class="layui-btn layui-btn-sm layui-btn-disabled" disabled style="background-color: #5FB878;color:#FBFBFB;"></button>
+							</span>
+						</span>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">活动内容</label>
+        <div class="layui-input-block" th:if="${showsign} eq 'add'" id="editor">
+
+        </div>
+        <div class="layui-input-block" th:if="${showsign} eq 'show'" id="editor">
+
+        </div>
+        <div class="layui-input-block" th:if="${showsign} eq 'edit'" id="editor">
+
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="promotion_tag">
+        <label class="layui-form-label">活动标签</label>
+        <div class="layui-input-block" th:if="${showsign} eq 'add'">
+					<span th:each="ptag : ${promotion.appPromotionTags}">
+						<input type="checkbox" th:title="${ptag.tagName}" th:value="${ptag.id}">
+					</span>
+        </div>
+        <div class="layui-input-block" th:if="${showsign} eq 'show'">
+					<span th:each="ptag : ${promotion.appPromotionTags}">
+						<span th:if="${ptag.isCheck} eq '1'">
+							<input type="checkbox" th:title="${ptag.tagName}" checked disabled="disabled">
+						</span>
+					</span>
+        </div>
+        <div class="layui-input-block" th:if="${showsign} eq 'edit'">
+					<span th:each="ptag : ${promotion.appPromotionTags}">
+						<span th:if="${ptag.isCheck} eq '0'">
+							<input type="checkbox" th:title="${ptag.tagName}" th:value="${ptag.id}">
+						</span>
+						<span th:if="${ptag.isCheck} eq '1'">
+							<input type="checkbox" th:title="${ptag.tagName}" th:value="${ptag.id}" checked>
+						</span>
+					</span>
+        </div>
+    </div>
+    <div class="layui-row" style="text-align: center;" th:if="${showsign} eq 'add'">
+        <button class="layui-btn" lay-submit="" lay-filter="save">提交</button>
+        <button class="layui-btn" id="btnCancel">取消</button>
+    </div>
+    <div class="layui-row" style="text-align: center;" th:if="${showsign} eq 'edit'">
+        <button class="layui-btn" lay-submit="" lay-filter="save">提交</button>
+        <button class="layui-btn" id="btnCancel">取消</button>
+    </div>
+</form>
+<textarea style="display: none;" id="hide_content" th:text="${promotion.promotionContent}"></textarea>
+<script src="/static/layui/layui.all.js" type="text/javascript"  charset="UTF-8"></script>
+<script src="/static/wangeditor/release/wangEditor.min.js" charset="utf-8"></script>
+<script src="/static/management/promotion/promotion.info.js" charset="utf-8"></script>
+</body>
+
+</html>

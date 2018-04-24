@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>物品借还</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css"
+          media="all">
+    <script type="text/javascript" charset="UTF-8"
+            src="/static/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/static/layui/layui.all.js" type="text/javascript"
+            charset="UTF-8"></script>
+    <style type="text/css">
+        #promotion_add {
+            padding: 10px 10px;
+        }
+
+        .layui-row {
+            margin-top: 10px
+        }
+    </style>
+</head>
+
+<body class="layui-card-body">
+<div id="promotion_add">
+    <form class="layui-form" action="">
+        <input type="hidden" th:value="${goodsInfo.id}" name="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label">物品名称</label>
+            <div class="layui-input-block">
+                <input type="text" lay-verify="goodsName"
+                       autocomplete="off"
+                       th:value="${goodsInfo.goodsName}"
+                       name="goodsName"
+                       placeholder="请输入名称"
+                       class="layui-input" disabled="disabled">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">购买价格</label>
+            <div class="layui-input-block" >
+                <input type="text" lay-verify="goodsPrice"
+                       autocomplete="off"
+                       th:value="${goodsInfo.getGoodsPrice()}"
+                       name="goodsPrice"
+                       placeholder="请输入金额"
+                       class="layui-input" disabled="disabled">
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">物品数量</label>
+            <div class="layui-input-block">
+                <input type="text" lay-verify="goodsNumber"
+                       autocomplete="off"
+                       name="goodsNumber"
+                       th:value="${goodsInfo.goodsNumber}"
+                       class="layui-input" disabled="disabled">
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">购买时间</label>
+            <div class="layui-input-block" >
+                <input type="text" name="goodsBuyTime"
+                       th:value="${goodsInfo.goodsBuyTime}"
+                       id="goodsBuyTime" lay-verify="datetime"
+                       placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
+                       class="layui-input" disabled="disabled">
+            </div>
+        </div>
+        <div class="layui-form-item" th:if="${sign} eq 'lend'">
+            <label class="layui-form-label">借物人名</label>
+            <div class="layui-input-block">
+                <input type="text"  lay-verify="goodsLender"  autocomplete="off"
+                       name="goodsLender"
+                       placeholder="请输入人名"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item"  th:if="${sign} eq 'return'">
+            <label class="layui-form-label">还物人名</label>
+            <div class="layui-input-block" >
+                <input type="text"  lay-verify="goodsReturner"  autocomplete="off"
+                       name="goodsReturner"
+                       placeholder="请输入人名"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" th:if="${sign} eq 'lend'">
+            <label class="layui-form-label">借记数量</label>
+            <div class="layui-input-block" >
+                <input type="text" lay-verify="goodsNumber"
+                       autocomplete="off"
+                       name="goodsNumber"
+                       placeholder="请输入数量"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" th:if="${sign} eq 'return'">
+            <label class="layui-form-label">归还数量</label>
+            <div class="layui-input-block" >
+                <input type="text" lay-verify="goodsNumber"
+                       autocomplete="off"
+                       name="goodsNumber"
+                       placeholder="请输入数量"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item"  th:if="${sign} eq 'lend'">
+            <label class="layui-form-label">借物时间</label>
+            <div class="layui-input-block" >
+                <input type="text" name="lendTime"
+                       id="lendTime" lay-verify="datetime"
+                       placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item"    th:if=" ${sign} eq 'return'">
+            <label class="layui-form-label">还物时间</label>
+            <div class="layui-input-block" >
+                <input type="text" name="returnTime"
+                       id="lendTime" lay-verify="datetime"
+                       placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-row" style="text-align: center;">
+                <button class="layui-btn" lay-submit
+                        lay-filter="doSubmit">提交
+                </button>
+                <button class="layui-btn" type="reset" id="btnCancel">取消
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="/static/management/goods/lend.js" charset="utf-8"></script>
+<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+</body>
+</html>

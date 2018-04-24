@@ -4,11 +4,13 @@ import com.gzu.su.manager.common.response.MapResult;
 import com.gzu.su.manager.common.response.PageResult;
 import com.gzu.su.manager.goods.model.GoodsInfo;
 import com.gzu.su.manager.goods.service.GoodsService;
-import org.apache.ibatis.annotations.Insert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,9 +44,39 @@ public class GoodsController {
         return "goods/goods_statistic";
     }
 
+    @RequestMapping(value = "add_info")
+    public String info(Model model,String pid,String sign){
+        try {
+            GoodsInfo goodsInfo = new GoodsInfo();
+            if(!StringUtils.isEmpty(pid)){
+             goodsInfo = goodsService.findGoodsById(pid);
+            }
+            model.addAttribute("goodsInfo", goodsInfo);
+            model.addAttribute("sign",sign);
+        }catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return "goods/goods_info";
+    }
+
+    @RequestMapping(value = "lend_return")
+    public String lendInfo(Model model,String pid,String sign) throws Exception{
+        try {
+            GoodsInfo goodsInfo = new GoodsInfo();
+            if(!StringUtils.isEmpty(pid)){
+                goodsInfo = goodsService.findGoodsById(pid);
+            }
+            model.addAttribute("goodsInfo", goodsInfo);
+            model.addAttribute("sign",sign);
+        }catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return "goods/lend_info";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/page")
-    public PageResult<GoodsInfo> page(Integer page, Integer limit, String searchName) {
+    public PageResult<GoodsInfo> page(Integer page, Integer limit, String searchName) throws Exception {
         PageResult<GoodsInfo> result = new PageResult<GoodsInfo>();
         try {
             Integer startNum = 0;
@@ -66,9 +98,9 @@ public class GoodsController {
 
     @ResponseBody
     @RequestMapping(value = "insert")
-    public MapResult insert(GoodsInfo goodsInfo) {
+    public MapResult insertParam(String pid,String goodsName, String goodsPrice, String goodsNumber,String goodsBuyTime) throws Exception{
         try {
-            goodsService.insert(goodsInfo);
+            goodsService.insertParam(pid,goodsName,goodsPrice,goodsNumber,goodsBuyTime);
             return MapResult.ok(200, "保存成功");
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -78,9 +110,9 @@ public class GoodsController {
 
     @ResponseBody
     @RequestMapping(value = "delete")
-    public MapResult delete(String id){
+    public MapResult delete(String pid) throws Exception{
         try {
-            goodsService.deleteByPrimaryKey(id);
+            goodsService.deleteByPrimaryKey(pid);
             return MapResult.ok(200,"删除成功");
         }catch (Exception e){
             log.error(e.getMessage());
@@ -90,14 +122,15 @@ public class GoodsController {
 
     @ResponseBody
     @RequestMapping(value = "update")
-    public MapResult update(GoodsInfo goodsInfo) {
+    public MapResult update( GoodsInfo goodsInfo) throws Exception{
         try {
-            goodsService.updateByPrimaryKey(goodsInfo);
-            if (goodsInfo.getStatus().equals("1")) {
-                return MapResult.ok(200, "借记成功");
+            int i =  goodsService.updateByPrimaryKey(goodsInfo);
+            if(i != 0){
+                return MapResult.ok(0, "失败");
             }else {
-                return MapResult.ok(200,"归还成功");
+                return MapResult.ok(200, "成功");
             }
+
         }catch (Exception e){
             log.error(e.getMessage());
             return MapResult.error(-1,"操作失败");

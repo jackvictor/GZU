@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
     <script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
     <script src="/static/layui/layui.all.js" type="text/javascript" charset="UTF-8"></script>
-    <title>物品维护</title>
+    <title>事务管理</title>
     <script type="text/html" id="barTpl">
         <a class="layui-btn  layui-btn-xs  layui-btn-warm" onclick="detail('{{d.id}}','edit')">修改</a>
         <a class="layui-btn  layui-btn-xs layui-btn-danger" onclick="delete_goods('{{d.id}}')">删除</a>
@@ -29,7 +29,7 @@
     </div>
     <div class="layui-col-xs4 search" >
 				<span class=" layui-inline">
-                          <input type="text" id="searchValue" required lay-verify="required" placeholder="请输入物品名/类型名" autocomplete="off" class="layui-input">
+                          <input type="text" id="searchValue" required lay-verify="required" placeholder="请输入部门名/部长名" autocomplete="off" class="layui-input">
                         </span>
         <span class="layui-inline">
                            <button class="layui-btn" id="doSearch">搜索</button>
@@ -39,7 +39,7 @@
 <div class="layui-row">
     <table class="layui-table" id="table" lay-filter="table"></table>
 </div>
-<script src="/static/management/goods/goods.list.js" charset="utf-8"></script>
+<script src="/static/management/department/department.list.js" charset="utf-8"></script>
 <script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
 </body>
 

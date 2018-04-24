@@ -18,8 +18,10 @@ public interface GoodsInfoMapper {
 
     int updateByPrimaryKey(GoodsInfo record);
 
-    List<GoodsInfo> findByPage(@Param("startNum")Integer startNum,@Param("size")Integer size,@Param("gName")String pName);
+    List<GoodsInfo> findByPage(@Param("startNum") Integer startNum, @Param("size") Integer size, @Param("gName") String gName) throws Exception;
 
-    Integer findByPageCount(@Param("gName")String pName);
+    Integer findByPageCount(@Param("gName") String gName) throws Exception;
+
+    GoodsInfo findByName(@Param("gName") String gName) throws Exception;
 
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>物品归还</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css"
+          media="all">
+    <script type="text/javascript" charset="UTF-8"
+            src="/static/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/static/layui/layui.all.js" type="text/javascript"
+            charset="UTF-8"></script>
+    <style type="text/css">
+        #promotion_add {
+            padding: 10px 10px;
+        }
+
+        .layui-row {
+            margin-top: 10px
+        }
+    </style>
+</head>
+
+<body class="layui-card-body">
+<div id="promotion_add">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">活动标签</label>
+            <div class="layui-input-block">
+                <input type="text"  lay-verify="tagName"  autocomplete="off"
+                       name="tagName"
+                       placeholder="请输入标签名"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">标签描述</label>
+            <div class="layui-input-block">
+                <input type="text"  lay-verify="tagDesc"  autocomplete="off"
+                       name="tagDesc"
+                       placeholder="请输入标签描述"
+                       class="layui-input">
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-row" style="text-align: center;">
+                <button class="layui-btn" lay-submit
+                        lay-filter="doSubmit">提交
+                </button>
+                <button class="layui-btn" type="reset" id="btnCancel">取消
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="/static/management/dictionary/promotionTag.info.js" charset="utf-8"></script>
+<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+</body>
+</html>

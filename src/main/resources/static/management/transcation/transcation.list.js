@@ -6,37 +6,46 @@ layui.use(['table', 'form', 'layer'], function () {
         layer = layui.layer
     table.render({
         elem: '#table',
-        url: '/goods/page',
+        url: '/transaction/page',
         page: true,
         cols: [[
             {
-                field: 'goodsName',
+                field: 'transactionName',
                 sort: false,
-                title: '物品名称',
+                title: '事务名称',
+                width: '15%'
+            },
+            {field:'departmentList', sort: false,  templet:function(d){
+                    var depments = "";
+                    if(d.departmentList.length > 0){
+                        for(var i = 0; i < d.departmentList.length; i++){
+                            depments = depments + d.departmentList[i].depName + ";";
+                        }
+                    }
+                    return ;
+                }, title: '参与部门',width:'20%'},
+            {
+                field: 'statusDesc',
+                sort: false,
+                title: '审核意见',
                 width: '20%'
             },
             {
-                field: 'goodsPrice',
+                field: 'ministerPhoneNu',
                 sort: false,
-                title: '物品单价',
+                title: '部长电话',
                 width: '20%'
             },
             {
                 field: 'createTime',
                 sort: false,
                 title: '创建时间',
-                width: '20%'
+                width: '10%'
             },
             {
                 field: 'updateTime',
                 sort: false,
-                title: '更改时间',
-                width: '20%'
-            },
-            {
-                field: 'goodsNumber',
-                sort: false,
-                title: '物品数量',
+                title: '更新时间',
                 width: '10%'
             },
             {
@@ -61,11 +70,11 @@ layui.use(['table', 'form', 'layer'], function () {
         var open_height = Math.round($(parent.document.getElementsByClassName("layui-tab-content")[0]).height() * 0.83);
         layer.open({
             type: 2,
-            title:'新增物品',
+            title:'新增部门',
             fixed: false, //不固定
             area:['100%', open_height+'px'],
             offset: ['0px', '0px'],
-            content: '/goods/add_info?sign=add'
+            content: '/department/department_info?sign=add'
 
         });
     });
@@ -82,11 +91,11 @@ function doSearch() {
 
 function detail(pid,sign){
     var open_height = Math.round($(parent.document.getElementsByClassName("layui-tab-content")[0]).height() * 0.83);
-    var url = '/goods/add_info?pid='+pid+'&sign='+sign;
+    var url = '/department/department_info?pid='+pid+'&sign='+sign;
     var title = '';
 
     if(sign == "edit"){
-        title = '修改物品';
+        title = '修改部门';
     }
 
     layer.open({
@@ -105,7 +114,7 @@ function delete_goods(pid) {
     layer.confirm('确定要删除吗？', function (index) {
         layer.load(1);
         $.ajax({
-            url: "/goods/delete?pid=" + pid,
+            url: "/department/delete?pid=" + pid,
             type: "GET",
             dataType: "JSON",
             success: function (data) {

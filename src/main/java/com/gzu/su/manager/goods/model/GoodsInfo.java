@@ -1,8 +1,12 @@
 package com.gzu.su.manager.goods.model;
 
+import org.springframework.util.StringUtils;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GoodsInfo {
+
     private String id;
 
     private String goodsName;
@@ -12,6 +16,8 @@ public class GoodsInfo {
     private String goodsPrice;
 
     private String goodsLender;
+
+    private String goodsNumber;
 
     private String goodsReturner;
 
@@ -23,7 +29,7 @@ public class GoodsInfo {
 
     private Date updateTime;
 
-    private String status;
+    private String goodsMargin;
 
     public String getId() {
         return id;
@@ -41,8 +47,14 @@ public class GoodsInfo {
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public Date getGoodsBuyTime() {
-        return goodsBuyTime;
+    public String getGoodsBuyTime() {
+        if(!StringUtils.isEmpty(goodsBuyTime)){
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return simpleDateFormat.format(goodsBuyTime);
+        }
+        else {
+            return null;
+        }
     }
 
     public void setGoodsBuyTime(Date goodsBuyTime) {
@@ -65,6 +77,14 @@ public class GoodsInfo {
         this.goodsLender = goodsLender == null ? null : goodsLender.trim();
     }
 
+    public String getGoodsNumber() {
+        return goodsNumber;
+    }
+
+    public void setGoodsNumber(String goodsNumber) {
+        this.goodsNumber = goodsNumber == null ? null : goodsNumber.trim();
+    }
+
     public String getGoodsReturner() {
         return goodsReturner;
     }
@@ -73,43 +93,57 @@ public class GoodsInfo {
         this.goodsReturner = goodsReturner == null ? null : goodsReturner.trim();
     }
 
-    public Date getLendTime() {
-        return lendTime;
+    public String getLendTime() {
+        if(!StringUtils.isEmpty(lendTime)){
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return simpleDateFormat.format(lendTime);
+        }
+        else {
+            return null;
+        }
     }
 
     public void setLendTime(Date lendTime) {
         this.lendTime = lendTime;
     }
 
-    public Date getReturnTime() {
-        return returnTime;
+    public String getReturnTime() {
+        if(!StringUtils.isEmpty(returnTime)){
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return simpleDateFormat.format(returnTime);
+        }
+        else {
+            return null;
+        }
     }
 
     public void setReturnTime(Date returnTime) {
         this.returnTime = returnTime;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getCreateTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return simpleDateFormat.format(createTime);
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public String getUpdateTime() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return simpleDateFormat.format(updateTime);
     }
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
-    public String getStatus() {
-        return status;
+    public String getGoodsMargin() {
+        return goodsMargin;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setGoodsMargin(String goodsMargin) {
+        this.goodsMargin = goodsMargin == null ? null : goodsMargin.trim();
     }
 }

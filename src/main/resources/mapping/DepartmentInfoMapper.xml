@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzu.su.manager.department.dao.DepartmentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gzu.su.manager.department.model.DepartmentInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="DEP_NAME" jdbcType="VARCHAR" property="depName" />
+    <result column="DEP_MINSTER_NAME" jdbcType="VARCHAR" property="depMinsterName" />
+    <result column="DEP_MEMBER_SUM" jdbcType="VARCHAR" property="depMemberSum" />
+    <result column="MINISTER_PHONE_NU" jdbcType="VARCHAR" property="ministerPhoneNu" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DEP_NAME, DEP_MINSTER_NAME, DEP_MEMBER_SUM, MINISTER_PHONE_NU, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gzusu_manager_department_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from gzusu_manager_department_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gzu.su.manager.department.model.DepartmentInfo">
+    insert into gzusu_manager_department_info (ID, DEP_NAME, DEP_MINSTER_NAME, 
+      DEP_MEMBER_SUM, MINISTER_PHONE_NU, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{depName,jdbcType=VARCHAR}, #{depMinsterName,jdbcType=VARCHAR}, 
+      #{depMemberSum,jdbcType=VARCHAR}, #{ministerPhoneNu,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gzu.su.manager.department.model.DepartmentInfo">
+    insert into gzusu_manager_department_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="depName != null">
+        DEP_NAME,
+      </if>
+      <if test="depMinsterName != null">
+        DEP_MINSTER_NAME,
+      </if>
+      <if test="depMemberSum != null">
+        DEP_MEMBER_SUM,
+      </if>
+      <if test="ministerPhoneNu != null">
+        MINISTER_PHONE_NU,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="depName != null">
+        #{depName,jdbcType=VARCHAR},
+      </if>
+      <if test="depMinsterName != null">
+        #{depMinsterName,jdbcType=VARCHAR},
+      </if>
+      <if test="depMemberSum != null">
+        #{depMemberSum,jdbcType=VARCHAR},
+      </if>
+      <if test="ministerPhoneNu != null">
+        #{ministerPhoneNu,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gzu.su.manager.department.model.DepartmentInfo">
+    update gzusu_manager_department_info
+    <set>
+      <if test="depName != null">
+        DEP_NAME = #{depName,jdbcType=VARCHAR},
+      </if>
+      <if test="depMinsterName != null">
+        DEP_MINSTER_NAME = #{depMinsterName,jdbcType=VARCHAR},
+      </if>
+      <if test="depMemberSum != null">
+        DEP_MEMBER_SUM = #{depMemberSum,jdbcType=VARCHAR},
+      </if>
+      <if test="ministerPhoneNu != null">
+        MINISTER_PHONE_NU = #{ministerPhoneNu,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gzu.su.manager.department.model.DepartmentInfo">
+    update gzusu_manager_department_info
+    set DEP_NAME = #{depName,jdbcType=VARCHAR},
+      DEP_MINSTER_NAME = #{depMinsterName,jdbcType=VARCHAR},
+      DEP_MEMBER_SUM = #{depMemberSum,jdbcType=VARCHAR},
+      MINISTER_PHONE_NU = #{ministerPhoneNu,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="findAllDep" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    gzusu_manager_department_info
+    order by UPDATE_TIME DESC
+  </select>
+
+  <select id="findByPage" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    gzusu_manager_department_info
+    <if test="dName != null and dName != ''">
+      WHERE
+      DEP_NAME LIKE CONCAT('%',#{dName,jdbcType=VARCHAR},'%')
+      OR
+      DEP_MINSTER_NAME LIKE CONCAT('%',#{dName,jdbcType=VARCHAR},'%')
+    </if>
+    order by UPDATE_TIME DESC
+    LIMIT #{startNum},#{size}
+  </select>
+
+  <select id="findByPageCount" resultType="java.lang.Integer">
+  SELECT
+  COUNT(g.ID)
+  FROM (
+  SELECT
+  <include refid="Base_Column_List" />
+  FROM
+  gzusu_manager_department_info
+    <if test="dName != null and dName != ''">
+      WHERE
+      DEP_NAME LIKE CONCAT('%',#{dName,jdbcType=VARCHAR},'%')
+      OR
+      DEP_MINSTER_NAME LIKE CONCAT('%',#{dName,jdbcType=VARCHAR},'%')
+    </if>
+  )g
+  </select>
+</mapper>
