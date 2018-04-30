@@ -22,4 +22,6 @@ public interface DepartmentInfoMapper {
     List<DepartmentInfo> findByPage(@Param("startNum") Integer startNum, @Param("size") Integer size, @Param("dName") String dName) throws Exception;
 
     Integer findByPageCount(@Param("dName") String dName) throws Exception;
+
+    List<DepartmentInfo> findAllDepartment() throws Exception;
 }

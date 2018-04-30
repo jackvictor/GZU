@@ -20,9 +20,11 @@ public interface TransactionInfoMapper {
 
     int updateByPrimaryKey(TransactionInfo record);
 
-    List<TransactionInfoVo> findByPage(@Param("startNum") Integer startNum, @Param("size") Integer size, @Param("dName") String dName) throws Exception;
+    List<TransactionInfoVo> findByPage(@Param("startNum") Integer startNum, @Param("size") Integer size, @Param("tName") String tName) throws Exception;
 
-    Integer findByPageCount(@Param("dName") String dName) throws Exception;
+    Integer findByPageCount(@Param("tName") String dName) throws Exception;
 
     Integer findByName(@Param("tName") String tName) throws Exception;
+
+    TransactionInfoVo selectTransactionInfoVo(@Param("id") String id) throws Exception;
 }

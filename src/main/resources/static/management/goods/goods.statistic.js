@@ -22,6 +22,12 @@ layui.use(['table', 'form', 'layer'], function () {
                 width: '10%'
             },
             {
+                field: 'goodsMargin',
+                sort: false,
+                title: '物品余量',
+                width: '10%'
+            },
+            {
                 field: 'goodsLender',
                 sort: false,
                 title: '借物人',
@@ -43,12 +49,6 @@ layui.use(['table', 'form', 'layer'], function () {
                 sort: false,
                 title: '归还时间',
                 width: '12%'
-            },
-            {
-                field: 'goodsMargin',
-                sort: false,
-                title: '物品余量',
-                width: '10%'
             },
             {
                 align: 'center',

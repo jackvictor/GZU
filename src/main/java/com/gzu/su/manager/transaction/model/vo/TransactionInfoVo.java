@@ -3,6 +3,7 @@ package com.gzu.su.manager.transaction.model.vo;
 import com.gzu.su.manager.department.model.DepartmentInfo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: jack.ye
@@ -28,7 +29,9 @@ public class TransactionInfoVo {
 
     private String status;
 
-    private DepartmentInfo departmentList;
+    private String transactionContent;
+
+    private List<DepartmentInfo> departmentInfos;
 
     public String getId() {
         return id;
@@ -78,7 +81,6 @@ public class TransactionInfoVo {
         this.transactionBegin = transactionBegin;
     }
 
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -103,11 +105,19 @@ public class TransactionInfoVo {
         this.status = status;
     }
 
-    public DepartmentInfo getDepartmentList() {
-        return departmentList;
+    public String getTransactionContent() {
+        return transactionContent;
     }
 
-    public void setDepartmentList(DepartmentInfo departmentList) {
-        this.departmentList = departmentList;
+    public void setTransactionContent(String transactionContent) {
+        this.transactionContent = transactionContent;
+    }
+
+    public List<DepartmentInfo> getDepartmentInfos() {
+        return departmentInfos;
+    }
+
+    public void setDepartmentInfos(List<DepartmentInfo> departmentInfos) {
+        this.departmentInfos = departmentInfos;
     }
 }

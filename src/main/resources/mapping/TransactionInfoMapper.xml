@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mapping.TransactionInfoMapper">
+<mapper namespace="com.gzu.su.manager.transaction.dao.TransactionInfoMapper">
   <resultMap id="BaseResultMap" type="com.gzu.su.manager.transaction.model.TransactionInfo">
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="TRANSACTION_NAME" jdbcType="VARCHAR" property="transactionName" />
-    <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
     <result column="STATUS_DESC" jdbcType="VARCHAR" property="statusDesc" />
+    <result column="TRANSACTION_SCHEME" jdbcType="VARCHAR" property="transactionScheme" />
     <result column="TRANSACTION_FINISH" jdbcType="TIMESTAMP" property="transactionFinish" />
     <result column="TRANSACTION_BEGIN" jdbcType="TIMESTAMP" property="transactionBegin" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
@@ -13,14 +13,14 @@
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gzu.su.manager.transaction.model.TransactionInfo">
-    <result column="TRANSACTION_SCHEME" jdbcType="LONGVARCHAR" property="transactionScheme" />
+    <result column="TRANSACTION_CONTENT" jdbcType="LONGVARCHAR" property="transactionContent" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, TRANSACTION_NAME, DEPARTMENT_ID, STATUS_DESC, TRANSACTION_FINISH, TRANSACTION_BEGIN, 
+    ID, TRANSACTION_NAME, STATUS_DESC, TRANSACTION_SCHEME, TRANSACTION_FINISH, TRANSACTION_BEGIN, 
     CREATE_TIME, UPDATE_TIME, STATUS
   </sql>
   <sql id="Blob_Column_List">
-    TRANSACTION_SCHEME
+    TRANSACTION_CONTENT
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
@@ -35,14 +35,14 @@
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.gzu.su.manager.transaction.model.TransactionInfo">
-    insert into gzusu_manager_transaction_info (ID, TRANSACTION_NAME, DEPARTMENT_ID, 
-      STATUS_DESC, TRANSACTION_FINISH, TRANSACTION_BEGIN, 
-      CREATE_TIME, UPDATE_TIME, STATUS, 
-      TRANSACTION_SCHEME)
-    values (#{id,jdbcType=VARCHAR}, #{transactionName,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, 
-      #{statusDesc,jdbcType=VARCHAR}, #{transactionFinish,jdbcType=TIMESTAMP}, #{transactionBegin,jdbcType=TIMESTAMP}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
-      #{transactionScheme,jdbcType=LONGVARCHAR})
+    insert into gzusu_manager_transaction_info (ID, TRANSACTION_NAME, STATUS_DESC, 
+      TRANSACTION_SCHEME, TRANSACTION_FINISH, 
+      TRANSACTION_BEGIN, CREATE_TIME, UPDATE_TIME, 
+      STATUS, TRANSACTION_CONTENT)
+    values (#{id,jdbcType=VARCHAR}, #{transactionName,jdbcType=VARCHAR}, #{statusDesc,jdbcType=VARCHAR}, 
+      #{transactionScheme,jdbcType=VARCHAR}, #{transactionFinish,jdbcType=TIMESTAMP}, 
+      #{transactionBegin,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{transactionContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gzu.su.manager.transaction.model.TransactionInfo">
     insert into gzusu_manager_transaction_info
@@ -53,11 +53,11 @@
       <if test="transactionName != null">
         TRANSACTION_NAME,
       </if>
-      <if test="departmentId != null">
-        DEPARTMENT_ID,
-      </if>
       <if test="statusDesc != null">
         STATUS_DESC,
+      </if>
+      <if test="transactionScheme != null">
+        TRANSACTION_SCHEME,
       </if>
       <if test="transactionFinish != null">
         TRANSACTION_FINISH,
@@ -74,8 +74,8 @@
       <if test="status != null">
         STATUS,
       </if>
-      <if test="transactionScheme != null">
-        TRANSACTION_SCHEME,
+      <if test="transactionContent != null">
+        TRANSACTION_CONTENT,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -85,11 +85,11 @@
       <if test="transactionName != null">
         #{transactionName,jdbcType=VARCHAR},
       </if>
-      <if test="departmentId != null">
-        #{departmentId,jdbcType=VARCHAR},
-      </if>
       <if test="statusDesc != null">
         #{statusDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionScheme != null">
+        #{transactionScheme,jdbcType=VARCHAR},
       </if>
       <if test="transactionFinish != null">
         #{transactionFinish,jdbcType=TIMESTAMP},
@@ -106,8 +106,8 @@
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="transactionScheme != null">
-        #{transactionScheme,jdbcType=LONGVARCHAR},
+      <if test="transactionContent != null">
+        #{transactionContent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -117,11 +117,11 @@
       <if test="transactionName != null">
         TRANSACTION_NAME = #{transactionName,jdbcType=VARCHAR},
       </if>
-      <if test="departmentId != null">
-        DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
-      </if>
       <if test="statusDesc != null">
         STATUS_DESC = #{statusDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionScheme != null">
+        TRANSACTION_SCHEME = #{transactionScheme,jdbcType=VARCHAR},
       </if>
       <if test="transactionFinish != null">
         TRANSACTION_FINISH = #{transactionFinish,jdbcType=TIMESTAMP},
@@ -138,8 +138,8 @@
       <if test="status != null">
         STATUS = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="transactionScheme != null">
-        TRANSACTION_SCHEME = #{transactionScheme,jdbcType=LONGVARCHAR},
+      <if test="transactionContent != null">
+        TRANSACTION_CONTENT = #{transactionContent,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
@@ -147,21 +147,21 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gzu.su.manager.transaction.model.TransactionInfo">
     update gzusu_manager_transaction_info
     set TRANSACTION_NAME = #{transactionName,jdbcType=VARCHAR},
-      DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
       STATUS_DESC = #{statusDesc,jdbcType=VARCHAR},
+      TRANSACTION_SCHEME = #{transactionScheme,jdbcType=VARCHAR},
       TRANSACTION_FINISH = #{transactionFinish,jdbcType=TIMESTAMP},
       TRANSACTION_BEGIN = #{transactionBegin,jdbcType=TIMESTAMP},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       STATUS = #{status,jdbcType=VARCHAR},
-      TRANSACTION_SCHEME = #{transactionScheme,jdbcType=LONGVARCHAR}
+      TRANSACTION_CONTENT = #{transactionContent,jdbcType=LONGVARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gzu.su.manager.transaction.model.TransactionInfo">
     update gzusu_manager_transaction_info
     set TRANSACTION_NAME = #{transactionName,jdbcType=VARCHAR},
-      DEPARTMENT_ID = #{departmentId,jdbcType=VARCHAR},
       STATUS_DESC = #{statusDesc,jdbcType=VARCHAR},
+      TRANSACTION_SCHEME = #{transactionScheme,jdbcType=VARCHAR},
       TRANSACTION_FINISH = #{transactionFinish,jdbcType=TIMESTAMP},
       TRANSACTION_BEGIN = #{transactionBegin,jdbcType=TIMESTAMP},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
@@ -169,17 +169,18 @@
       STATUS = #{status,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-
-  <resultMap id="PageResultMap" type="com.gzu.su.manager.transaction.model.TransactionInfo">
+  <resultMap id="PageResultMap" type="com.gzu.su.manager.transaction.model.vo.TransactionInfoVo">
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="TRANSACTION_NAME" jdbcType="VARCHAR" property="transactionName" />
     <result column="STATUS_DESC" jdbcType="VARCHAR" property="statusDesc" />
     <result column="TRANSACTION_SCHEME" jdbcType="VARCHAR" property="transactionScheme" />
-    <result column="EXECUTION_TIME" jdbcType="TIMESTAMP" property="executionTime" />
+    <result column="TRANSACTION_FINISH" jdbcType="TIMESTAMP" property="transactionFinish" />
+    <result column="TRANSACTION_BEGIN" jdbcType="TIMESTAMP" property="transactionBegin" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
-    <collection property="departmentList" ofType="com.gzu.su.manager.department.model.DepartmentInfo">
+    <result column="TRANSACTION_CONTENT" jdbcType="LONGVARCHAR" property="transactionContent" />
+    <collection property="departmentInfos" ofType="com.gzu.su.manager.department.model.DepartmentInfo">
       <result column="DEP_NAME" property="depName" jdbcType="VARCHAR"></result>
     </collection>
   </resultMap>
@@ -190,14 +191,16 @@
     INFO.TRANSACTION_NAME,
     INFO.STATUS_DESC,
     INFO.TRANSACTION_SCHEME,
-    INFO.EXECUTION_TIME,
+    INFO.TRANSACTION_FINISH,
+    INFO.TRANSACTION_BEGIN,
     DEP.DEP_NAME,
     INFO.CREATE_TIME,
     INFO.UPDATE_TIME,
-    INFO.STATUS
+    INFO.STATUS,
+    INFO.TRANSACTION_CONTENT
     FROM
     gzusu_manager_transaction_info INFO
-    <if test="dName != null and dName != '">
+    <if test="tName != null and tName != ''">
       WHERE INFO.TRANSACTION_NAME  LIKE CONCAT('%',#{tName,jdbcType=VARCHAR},'%')
     </if>
     LEFT JOIN(
@@ -212,23 +215,43 @@
     LIMIT #{startNum},#{size}
   </select>
 
-  <select id="findByPageCount" resultType="java.lang.Integer">
-    SELECT
-    COUNT BY(d.ID)
-    FROM (
+  <select id="selectTransactionInfoVo" resultMap="PageResultMap">
     SELECT
     INFO.ID,
     INFO.TRANSACTION_NAME,
     INFO.STATUS_DESC,
     INFO.TRANSACTION_SCHEME,
-    INFO.EXECUTION_TIME,
+    INFO.TRANSACTION_FINISH,
+    INFO.TRANSACTION_BEGIN,
     DEP.DEP_NAME,
     INFO.CREATE_TIME,
     INFO.UPDATE_TIME,
-    INFO.STATUS
+    INFO.STATUS,
+    INFO.TRANSACTION_CONTENT
     FROM
     gzusu_manager_transaction_info INFO
-    <if test="dName != null and dName != '">
+    WHERE INFO.ID = #{id}
+    LEFT JOIN(
+    SELECT
+    DEP.DEP_NAME,
+    MID.TRANSACTION_ID
+    FROM gzusu_manager_department_info DEP
+    LEFT JOIN
+    gzusu_manager_transaction_department_mid MID ON MID.DEPARTMENT_ID = DEP.ID
+    ) DEP ON INFO.ID = DEP.TRANSACTION_ID
+    order by INFO.UPDATE_TIME DESC
+  </select>
+
+
+  <select id="findByPageCount" resultType="java.lang.Integer">
+    SELECT
+    COUNT(d.ID)
+    FROM (
+    SELECT
+    *
+    FROM
+    gzusu_manager_transaction_info INFO
+    <if test="tName != null and tName != ''">
       WHERE INFO.TRANSACTION_NAME  LIKE CONCAT('%',#{tName,jdbcType=VARCHAR},'%')
     </if>
     )d

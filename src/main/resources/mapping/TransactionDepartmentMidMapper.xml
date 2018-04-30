@@ -90,4 +90,8 @@
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  <delete id="deleteByTransactionId" parameterType="java.lang.String">
+     delete from gzusu_manager_transaction_department_mid
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
 </mapper>

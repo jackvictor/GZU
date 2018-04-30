@@ -3,7 +3,10 @@ package com.gzu.su.manager.transaction.service;
 import com.gzu.su.manager.common.response.PageResult;
 import com.gzu.su.manager.department.model.DepartmentInfo;
 import com.gzu.su.manager.transaction.model.TransactionInfo;
+import com.gzu.su.manager.transaction.model.vo.TransactionDepVo;
 import com.gzu.su.manager.transaction.model.vo.TransactionInfoVo;
+
+import java.util.List;
 
 /**
  * @author: User
@@ -15,11 +18,17 @@ public interface TransactionService {
 
     int deleteByPrimaryKey(String id) throws Exception;
 
-    int insert(TransactionInfo transactionInfo) throws Exception;
+    int saveTransactionInfoVo(TransactionDepVo transactionDepVo) throws Exception;
 
-    int updateByPrimaryKey(TransactionInfo transactionInfo) throws Exception;
+    int updateTransactionInfoVo(TransactionDepVo TransactionDepVo) throws Exception;
 
     TransactionInfo findTransactionById(String id) throws Exception;
 
     int findByName(String tName) throws Exception;
+
+    List<DepartmentInfo> findAllDepartment() throws Exception;
+
+    int saveTranactionInfo(TransactionInfo transactionInfo) throws Exception;
+
+    TransactionInfoVo findTransactionInfoVoById(String id) throws Exception;
 }

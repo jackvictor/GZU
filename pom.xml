@@ -84,6 +84,7 @@
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-parameter-names</artifactId>
 		</dependency>
+
 		<!-- 分页插件
         <dependency>
             <groupId>com.github.pagehelper</groupId>

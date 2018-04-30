@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>子页面</title>
+    <style type="text/css">
+        .iframe {
+            padding: 10px;
+            height: 610px;
+            width: 560px;
+            border: 1px solid #007DDB;
+        }
+
+        .layui-row {
+            padding-top: 10px;
+        }
+
+        #left {
+            height: 350px;
+            border: 2px solid #E2E2E2;
+            display: inline;
+        }
+
+        #middle {
+            height: 350px;
+            display: inline;
+        }
+
+        #right {
+            height: 350px;
+            display: inline;
+            border: 2px solid #E2E2E2;
+        }
+        .layui-col-xs2 div{
+            margin-top:20px ;
+        }
+    </style>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+</head>
+
+<body class="layui-card-body">
+<input th:value="${promotionid}" id="promotionId" type="hidden"/>
+<div id='promotion_add' class="layui-form">
+    <div class="layui-inline">
+			<span class=" layui-inline">
+				<input id="search_name" style="width: 440px;" type="text" placeholder="请输入商家关键字" class="layui-input">
+			</span>
+        <span class="layui-inline">
+				<button id="searchMer" class="layui-btn">搜索</button>
+			</span>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-xs5" id="left" style="overflow-x: auto;">
+				<span th:each="mers : ${merchantAll}" style="display: inherit;margin-left: 5px;">
+					<input type="checkbox" name="like" th:title="${mers.merchantName}" th:value="${mers.id}" lay-skin="primary">
+				</span>
+        </div>
+        <div class="layui-col-xs2" id="middle" style=" text-align:center;padding: 80px 0px;">
+            <div><button id="left_add_all" class="layui-btn layui-btn-sm">全选&nbsp;<i class="layui-icon" >&#xe65b;</i> </button></div>
+            <div><button id="right_remove_all" class="layui-btn layui-btn-sm layui-btn-danger"><i class="layui-icon " >&#xe65a;</i>&nbsp;取消 </button></div>
+
+            <div><button id="left_add" class="layui-btn layui-btn-sm"><i class="layui-icon" >&#xe65b;</i> </button></div>
+            <div><button id="right_remove" class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon " >&#xe65a;</i> </button></div>
+        </div>
+        <div class="layui-col-xs5" id="right" style="overflow-x: auto;">
+            <!-- <span th:each="mer : ${merchants}">
+                <input type="checkbox" name="like" th:title="${mer.merchantName}" th:value="${mer.id}">
+            </span> -->
+        </div>
+    </div>
+</div>
+<script src="/static/layui/layui.all.js" type="text/javascript"  charset="UTF-8"></script>
+<script src="/static/management/transaction/promotion.iframe.js" charset="utf-8"></script>
+</body>
+
+</html>

@@ -1,7 +1,11 @@
 package com.gzu.su.manager.transaction.controller;
 
+import com.gzu.su.manager.common.response.MapResult;
 import com.gzu.su.manager.common.response.PageResult;
+import com.gzu.su.manager.department.dao.DepartmentInfoMapper;
+import com.gzu.su.manager.department.service.DepartmentService;
 import com.gzu.su.manager.transaction.model.TransactionInfo;
+import com.gzu.su.manager.transaction.model.vo.TransactionDepVo;
 import com.gzu.su.manager.transaction.model.vo.TransactionInfoVo;
 import com.gzu.su.manager.transaction.service.TransactionService;
 import org.slf4j.Logger;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,6 +32,9 @@ public class TranscationController {
     @Autowired
     TransactionService transactionService;
 
+    @Autowired
+    DepartmentService departmentService;
+
     @RequestMapping(value = "list")
     public String list() throws Exception{
         return "transaction/transaction_list";
@@ -35,17 +43,21 @@ public class TranscationController {
     @RequestMapping(value = "info")
     public String info(Model model,String id, String sign) throws Exception{
         try {
-            TransactionInfo transactionInfo = new TransactionInfo();
+            TransactionInfoVo transactionInfoVo = new TransactionInfoVo();
             if(!StringUtils.isEmpty(id) && !StringUtils.isEmpty(sign)){
-                transactionInfo = transactionService.findTransactionById(id);
-                model.addAttribute("transactionInfo",transactionInfo);
-                model.addAttribute("sign",sign);
+                transactionInfoVo = transactionService.findTransactionInfoVoById(id);
             }
+            if("add".equals(sign)){
+                transactionInfoVo.setDepartmentInfos(departmentService.findAllDepartment());
+            }
+            model.addAttribute("transactionInfoVo",transactionInfoVo);
+            model.addAttribute("sign",sign);
         }catch (Exception e){
             log.error(e.getMessage(),e);
         }
         return "transaction/transaction_info";
     }
+
     @RequestMapping(value = "page")
     @ResponseBody
     public PageResult<TransactionInfoVo> page(Integer page, Integer limit, String searchName) {
@@ -68,5 +80,33 @@ public class TranscationController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping(value = "insert")
+    public MapResult saveTran(@RequestBody TransactionDepVo transactionDepVo) throws Exception{
+        try {
+            if(StringUtils.isEmpty(transactionDepVo.getId())){
+                transactionService.saveTransactionInfoVo(transactionDepVo);
+                return MapResult.ok(200,"保存成功");
+            }else {
+                transactionService.updateTransactionInfoVo(transactionDepVo);
+                return MapResult.ok(200,"保存成功");
+            }
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+            return MapResult.error(-1,"保存失败");
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "delete")
+    public MapResult delete(String pid) throws Exception{
+        try {
+            transactionService.deleteByPrimaryKey(pid);
+            return  MapResult.ok(200,"删除成功");
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+            return MapResult.error(-1,"删除失败");
+        }
+    }
 
 }

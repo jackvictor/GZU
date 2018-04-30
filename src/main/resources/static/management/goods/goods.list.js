@@ -22,6 +22,12 @@ layui.use(['table', 'form', 'layer'], function () {
                 width: '20%'
             },
             {
+                field: 'goodsNumber',
+                sort: false,
+                title: '物品数量',
+                width: '10%'
+            },
+            {
                 field: 'createTime',
                 sort: false,
                 title: '创建时间',
@@ -32,12 +38,6 @@ layui.use(['table', 'form', 'layer'], function () {
                 sort: false,
                 title: '更改时间',
                 width: '20%'
-            },
-            {
-                field: 'goodsNumber',
-                sort: false,
-                title: '物品数量',
-                width: '10%'
             },
             {
                 align: 'center',

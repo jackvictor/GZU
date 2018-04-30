@@ -7,9 +7,9 @@ public class TransactionInfo {
 
     private String transactionName;
 
-    private String departmentId;
-
     private String statusDesc;
+
+    private String transactionScheme;
 
     private Date transactionFinish;
 
@@ -21,7 +21,7 @@ public class TransactionInfo {
 
     private String status;
 
-    private String transactionScheme;
+    private String transactionContent;
 
     public String getId() {
         return id;
@@ -39,20 +39,20 @@ public class TransactionInfo {
         this.transactionName = transactionName == null ? null : transactionName.trim();
     }
 
-    public String getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId == null ? null : departmentId.trim();
-    }
-
     public String getStatusDesc() {
         return statusDesc;
     }
 
     public void setStatusDesc(String statusDesc) {
         this.statusDesc = statusDesc == null ? null : statusDesc.trim();
+    }
+
+    public String getTransactionScheme() {
+        return transactionScheme;
+    }
+
+    public void setTransactionScheme(String transactionScheme) {
+        this.transactionScheme = transactionScheme == null ? null : transactionScheme.trim();
     }
 
     public Date getTransactionFinish() {
@@ -95,11 +95,11 @@ public class TransactionInfo {
         this.status = status == null ? null : status.trim();
     }
 
-    public String getTransactionScheme() {
-        return transactionScheme;
+    public String getTransactionContent() {
+        return transactionContent;
     }
 
-    public void setTransactionScheme(String transactionScheme) {
-        this.transactionScheme = transactionScheme == null ? null : transactionScheme.trim();
+    public void setTransactionContent(String transactionContent) {
+        this.transactionContent = transactionContent == null ? null : transactionContent.trim();
     }
 }

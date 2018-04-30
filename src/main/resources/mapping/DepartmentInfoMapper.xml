@@ -153,4 +153,10 @@
     </if>
   )g
   </select>
+  
+  <select id="findAllDepartment" resultMap="BaseResultMap">
+    SELECT *
+    FROM
+    gzusu_manager_department_info
+  </select>
 </mapper>

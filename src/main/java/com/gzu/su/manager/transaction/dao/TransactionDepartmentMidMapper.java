@@ -14,4 +14,6 @@ public interface TransactionDepartmentMidMapper {
     int updateByPrimaryKeySelective(TransactionDepartmentMid record);
 
     int updateByPrimaryKey(TransactionDepartmentMid record);
+
+    int deleteByTransactionId(String id);
 }

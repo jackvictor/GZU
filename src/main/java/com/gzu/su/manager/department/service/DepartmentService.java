@@ -4,6 +4,8 @@ import com.gzu.su.manager.common.response.PageResult;
 import com.gzu.su.manager.department.model.DepartmentInfo;
 import com.gzu.su.manager.goods.model.GoodsInfo;
 
+import java.util.List;
+
 /**
  * @author: User
  * @create: 2018/04/21 15:26
@@ -21,4 +23,6 @@ public interface DepartmentService {
     int updateByPrimaryKey(DepartmentInfo departmentInfo) throws Exception;
 
     DepartmentInfo findDepartmentById(String id) throws Exception;
+
+    List<DepartmentInfo> findAllDepartment() throws Exception;
 }

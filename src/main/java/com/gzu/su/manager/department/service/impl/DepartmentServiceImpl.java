@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -67,5 +68,10 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public DepartmentInfo findDepartmentById(String id) throws Exception {
         return departmentInfoMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<DepartmentInfo> findAllDepartment() throws Exception {
+        return departmentInfoMapper.findAllDepartment();
     }
 }
