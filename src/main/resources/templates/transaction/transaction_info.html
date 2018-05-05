@@ -13,22 +13,23 @@
 <input type="hidden" th:value="${sign}" id="page_sign">
 
 <span th:if="${sign} eq 'edit' or ${sign} eq 'show'">
-			<input type="hidden" id="h_start_date" th:value="${transactionInfo.promotionBegin}">
-			<input type="hidden" id="h_end_date" th:value="${transactionInfo.promotionFinish}">
+			<input type="hidden" id="h_start_date" th:value="${transactionInfoVo.transactionBegin}">
+			<input type="hidden" id="h_end_date" th:value="${transactionInfoVo.transactionFinish}">
+            <input type="hidden" id="status" th:value="${transactionInfoVo.status}">
 		</span>
 
 <form class="layui-form" action="">
-    <input type="hidden" th:value="${transactionInfo.id}" name="id" id="id">
+    <input type="hidden" th:value="${transactionInfoVo.id}" name="id" id="pid">
     <div class="layui-form-item">
         <label class="layui-form-label">活动名称</label>
         <div class="layui-input-block" th:if="${sign} eq 'add'">
-            <input type="text" id="transactionName" name="" lay-verify="transactionName" autocomplete="off" placeholder="请输入活动名称" class="layui-input">
-        </div>
-        <div class="layui-input-block" th:if="${sign} eq 'show'">
-            <input type="text" name="title" autocomplete="off" th:placeholder="${promotion.promotionName}" class="layui-input" readonly="readonly">
+            <input type="text" id="transactionName" name="transactionName" lay-verify="transactionName" autocomplete="off" placeholder="请输入活动名称" class="layui-input">
         </div>
         <div class="layui-input-block" th:if="${sign} eq 'edit'">
-            <input type="text" id="promotionName" name="promotionName" lay-verify="promotionName" autocomplete="off" th:value="${promotion.promotionName}" placeholder="请输入" class="layui-input">
+            <input type="text" id="transactionName" name="transactionName" lay-verify="transactionName" autocomplete="off" th:value="${transactionInfoVo.transactionName}" class="layui-input">
+        </div>
+        <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'check'">
+            <input type="text"  th:value="${transactionInfoVo.transactionName}" readonly="readonly" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -36,57 +37,49 @@
         <div class="layui-input-block" th:if="${sign} eq 'add'">
             <input type="text" id="transactionScheme" name="transactionScheme" lay-verify="transactionScheme" autocomplete="off" placeholder="请输入以往经验" class="layui-input">
         </div>
-        <div class="layui-input-block" th:if="${sign} eq 'show'">
-            <input type="text" name="title" autocomplete="off" th:placeholder="${promotion.promotionName}" class="layui-input" readonly="readonly">
-        </div>
         <div class="layui-input-block" th:if="${sign} eq 'edit'">
-            <input type="text" id="promotionName" name="promotionName" lay-verify="promotionName" autocomplete="off" th:value="${promotion.promotionName}" placeholder="请输入" class="layui-input">
+            <input type="text" id="transactionScheme" name="transactionScheme" lay-verify="transactionScheme" autocomplete="off" th:value="${transactionInfoVo.transactionScheme}" class="layui-input">
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">活动内容</label>
-        <div class="layui-input-block" th:if="${sign} eq 'add'">
-            <input type="text" id="transactionContent" name="transactionContent" lay-verify="transactionContent" autocomplete="off" placeholder="请输入活动名称" class="layui-input">
-        </div>
-        <div class="layui-input-block" th:if="${sign} eq 'show'">
-            <input type="text" name="title" autocomplete="off" th:placeholder="${promotion.promotionName}" class="layui-input" readonly="readonly">
-        </div>
-        <div class="layui-input-block" th:if="${sign} eq 'edit'">
-            <input type="text" id="promotionName" name="promotionName" lay-verify="promotionName" autocomplete="off" th:value="${promotion.promotionName}" placeholder="请输入" class="layui-input">
+        <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'check'">
+            <input type="text"  th:value="${transactionInfoVo.transactionScheme}" readonly="readonly" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">活动时间</label>
             <div style="width:330px;" class="layui-input-block" th:if="${sign} eq 'add'">
-                <input type="text" name="promotionDate" id="promotion_date" lay-verify="promotion_date" placeholder="yyyy-MM-dd HH:mm:ss ~ yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+                <input type="text" name="transactionDate" id="promotion_date" lay-verify="promotion_date" placeholder="yyyy-MM-dd HH:mm:ss ~ yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
             </div>
-            <div style="width:300px;" class="layui-input-block" th:if="${sign} eq 'show'">
-                <input type="text" name="date" id="show_promotion_date" autocomplete="off" class="layui-input" readonly="readonly">
+            <div style="width:330px;" class="layui-input-block" th:if="${sign} eq 'edit'">
+                <input type="text" name="transactionDate" id="promotion_date" lay-verify="promotion_date" placeholder="yyyy-MM-dd HH:mm:ss ~ yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
             </div>
-            <div style="width:300px;" class="layui-input-block" th:if="${sign} eq 'edit'">
-                <input type="text" name="promotionDate" id="promotion_date" lay-verify="promotion_date" placeholder="yyyy-MM-dd HH:mm:ss ~ yyyy-MM-dd HH:mm:ss" autocomplete="off" class="layui-input">
+            <div style="width:330px;" class="layui-input-block"th:if="${sign} eq 'show' or ${sign} eq 'check'">
+                <input type="text"  id="promotion_date" placeholder="yyyy-MM-dd HH:mm:ss ~ yyyy-MM-dd HH:mm:ss" readonly="readonly" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
     <div class="layui-form-item" id="promotion_merchant">
         <div>
-            <label class="layui-form-label">承办活动部门</label>
+            <label class="layui-form-label">承办部门</label>
             <div class="layui-input-block" th:if="${sign} eq 'add'">
                 <button id="promotion_iframe" type="button" class="layui-btn "><i class="layui-icon">&#xe620;</i>增加商家</button>
                 <span id="merchant_list"></span>
             </div>
-            <div class="layui-input-block" th:if="${sign} eq 'show'">
-						<span th:each="mer : ${promotion.merchantInfos}">
-							<button th:text="${mer.merchantName}" class="layui-btn layui-btn-sm layui-btn-disabled" disabled style="background-color: #5FB878;color:#FBFBFB;"></button>
-						</span>
-            </div>
             <div class="layui-input-block" th:if="${sign} eq 'edit'">
                 <button id="promotion_iframe" type="button" class="layui-btn "><i class="layui-icon">&#xe620;</i>增加商家</button>
                 <span id="merchant_list">
-							<span th:each="mer : ${promotion.merchantInfos}">
+							<span th:each="dep : ${transactionInfoVo.departmentInfos}">
 								<!-- <input type="checkbox" th:title="${mer.merchantName}" th:value="${mer.id}" checked disabled="disabled"> -->
-								<button th:text="${mer.merchantName}" th:value="${mer.id}" class="layui-btn layui-btn-sm layui-btn-disabled" disabled style="background-color: #5FB878;color:#FBFBFB;"></button>
+								<button th:text="${dep.depName}" th:value="${dep.id}" class="layui-btn layui-btn-sm layui-btn-disabled" disabled style="background-color: #5FB878;color:#FBFBFB;"></button>
+							</span>
+						</span>
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'check'">
+                <button id="promotion_iframe" type="button" class="layui-btn layui-btn-disabled"><i class="layui-icon">&#xe620;</i>增加商家</button>
+                <span id="merchant_list">
+							<span th:each="dep : ${transactionInfoVo.departmentInfos}">
+								<!-- <input type="checkbox" th:title="${mer.merchantName}" th:value="${mer.id}" checked disabled="disabled"> -->
+								<button th:text="${dep.depName}" th:value="${dep.id}" class="layui-btn layui-btn-sm layui-btn-disabled" disabled style="background-color: #5FB878;color:#FBFBFB;"></button>
 							</span>
 						</span>
             </div>
@@ -97,37 +90,38 @@
         <div class="layui-input-block" th:if="${sign} eq 'add'" id="editor">
 
         </div>
-        <div class="layui-input-block" th:if="${sign} eq 'show'" id="editor">
+        <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'check'" id="editor">
 
         </div>
         <div class="layui-input-block" th:if="${sign} eq 'edit'" id="editor">
 
         </div>
     </div>
-
-    <div class="layui-form-item" id="promotion_tag">
-        <label class="layui-form-label">承办活动部门</label>
-        <div class="layui-input-block" th:if="${sign} eq 'add'">
-					<span th:each="ptag : ${promotion.appPromotionTags}">
-						<input type="checkbox" th:title="${ptag.tagName}" th:value="${ptag.id}">
-					</span>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">审核建议</label>
+        <div class="layui-input-block" th:if="${sign} eq 'check'">
+            <textarea name="desc"  placeholder="请输入审核建议内容" class="layui-textarea"></textarea>
         </div>
-        <div class="layui-input-block" th:if="${sign} eq 'show'">
-					<span th:each="ptag : ${promotion.appPromotionTags}">
-						<span th:if="${ptag.isCheck} eq '1'">
-							<input type="checkbox" th:title="${ptag.tagName}" checked disabled="disabled">
-						</span>
-					</span>
+        <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'edit' or ${sign} eq 'add'">
+            <textarea name="desc" readonly="readonly" placeholder="仅在审核时输入" class="layui-textarea"></textarea>
         </div>
-        <div class="layui-input-block" th:if="${sign} eq 'edit'">
-					<span th:each="ptag : ${promotion.appPromotionTags}">
-						<span th:if="${ptag.isCheck} eq '0'">
-							<input type="checkbox" th:title="${ptag.tagName}" th:value="${ptag.id}">
-						</span>
-						<span th:if="${ptag.isCheck} eq '1'">
-							<input type="checkbox" th:title="${ptag.tagName}" th:value="${ptag.id}" checked>
-						</span>
-					</span>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">审核执行</label>
+        <div class="layui-input-block" th:if="${sign} eq 'check'">
+            <input type="radio" name="sex" value="2" title="未通过">
+            <input type="radio" name="sex" value="1" title="通过" checked>
+        </div>
+        <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'edit' or ${sign} eq 'add'">
+            <span th:if="${transactionInfoVo.status eq '2'}">
+            <input type="radio" name="sex" value="2" title="未通过">
+            </span>
+            <span th:if="${transactionInfoVo.status eq '1'}">
+            <input type="radio" name="sex" value="1" title="通过" checked>
+            </span>
+            <span th:if="${transactionInfoVo.status eq '0'}">
+            <input type="radio" name="sex" value="1" title="待审核" checked>
+            </span>
         </div>
     </div>
     <div class="layui-row" style="text-align: center;" th:if="${sign} eq 'add'">
@@ -139,10 +133,10 @@
         <button class="layui-btn" id="btnCancel">取消</button>
     </div>
 </form>
-<textarea style="display: none;" id="hide_content" th:text="${promotion.promotionContent}"></textarea>
+<textarea style="display: none;" id="hide_content" th:text="${transactionInfoVo.transactionContent}"></textarea>
 <script src="/static/layui/layui.all.js" type="text/javascript"  charset="UTF-8"></script>
 <script src="/static/wangeditor/release/wangEditor.min.js" charset="utf-8"></script>
-<script src="/static/management/transaction/transaction.list.js" charset="utf-8"></script>
+<script src="/static/management/transaction/transaction.info.js" charset="utf-8"></script>
 </body>
 
 </html>

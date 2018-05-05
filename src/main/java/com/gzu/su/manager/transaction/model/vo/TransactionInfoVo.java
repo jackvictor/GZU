@@ -2,6 +2,7 @@ package com.gzu.su.manager.transaction.model.vo;
 
 import com.gzu.su.manager.department.model.DepartmentInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -65,21 +66,24 @@ public class TransactionInfoVo {
         this.transactionScheme = transactionScheme;
     }
 
-    public Date getTransactionFinish() {
-        return transactionFinish;
+    public String getTransactionFinish() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return simpleDateFormat.format(transactionFinish);
     }
 
     public void setTransactionFinish(Date transactionFinish) {
         this.transactionFinish = transactionFinish;
     }
 
-    public Date getTransactionBegin() {
-        return transactionBegin;
+    public String getTransactionBegin() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return simpleDateFormat.format(transactionBegin);
     }
 
     public void setTransactionBegin(Date transactionBegin) {
         this.transactionBegin = transactionBegin;
     }
+
 
     public Date getCreateTime() {
         return createTime;

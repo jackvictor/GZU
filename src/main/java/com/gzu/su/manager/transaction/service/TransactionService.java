@@ -7,6 +7,7 @@ import com.gzu.su.manager.transaction.model.vo.TransactionDepVo;
 import com.gzu.su.manager.transaction.model.vo.TransactionInfoVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: User
@@ -16,6 +17,7 @@ import java.util.List;
 public interface TransactionService {
     PageResult<TransactionInfoVo> findByPage(Integer startNum, Integer size, String dName) throws Exception;
 
+    PageResult<TransactionInfoVo> checkByPage(Integer startNum, Integer size, String dName) throws Exception;
     int deleteByPrimaryKey(String id) throws Exception;
 
     int saveTransactionInfoVo(TransactionDepVo transactionDepVo) throws Exception;
@@ -26,9 +28,9 @@ public interface TransactionService {
 
     int findByName(String tName) throws Exception;
 
-    List<DepartmentInfo> findAllDepartment() throws Exception;
-
     int saveTranactionInfo(TransactionInfo transactionInfo) throws Exception;
 
     TransactionInfoVo findTransactionInfoVoById(String id) throws Exception;
+
+    public Map<String, Object> findCheckDepartmentByPid(String pid, String searchName) throws Exception;
 }

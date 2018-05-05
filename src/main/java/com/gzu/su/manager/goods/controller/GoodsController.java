@@ -84,9 +84,9 @@ public class GoodsController {
             if (page > 0) {
                 startNum = (page - 1) * size;
             }
+            result = goodsService.findByPage(startNum, size, searchName);
             result.setCode(0);
             result.setMsg("success");
-            result = goodsService.findByPage(startNum, size, searchName);
             return result;
         } catch (Exception e) {
             log.error(e.getMessage(), e);

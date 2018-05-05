@@ -72,6 +72,6 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public List<DepartmentInfo> findAllDepartment() throws Exception {
-        return departmentInfoMapper.findAllDepartment();
+        return null;
     }
 }

@@ -1,7 +1,6 @@
 package com.gzu.su.manager.department.dao;
 
 import com.gzu.su.manager.department.model.DepartmentInfo;
-import com.gzu.su.manager.goods.model.GoodsInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -23,5 +22,7 @@ public interface DepartmentInfoMapper {
 
     Integer findByPageCount(@Param("dName") String dName) throws Exception;
 
-    List<DepartmentInfo> findAllDepartment() throws Exception;
+    List<DepartmentInfo> findAllDepartment(@Param("searchName") String searchName) throws Exception;
+
+    List<DepartmentInfo> findDepartmentByPid(@Param("pid") String pid) throws Exception;
 }

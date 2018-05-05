@@ -49,7 +49,7 @@ layui.use(['table', 'form', 'layer'], function () {
                 align: 'center',
                 toolbar: '#barTpl',
                 title: '操作',
-                width: '10%'
+                // width: '10%'
             }
         ]],
     });

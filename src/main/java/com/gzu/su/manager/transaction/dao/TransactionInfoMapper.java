@@ -24,6 +24,10 @@ public interface TransactionInfoMapper {
 
     Integer findByPageCount(@Param("tName") String dName) throws Exception;
 
+    List<TransactionInfoVo> checkByPage(@Param("startNum") Integer startNum, @Param("size") Integer size, @Param("tName") String tName) throws Exception;
+
+    Integer checkByPageCount(@Param("tName") String dName) throws Exception;
+
     Integer findByName(@Param("tName") String tName) throws Exception;
 
     TransactionInfoVo selectTransactionInfoVo(@Param("id") String id) throws Exception;

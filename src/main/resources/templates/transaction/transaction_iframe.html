@@ -42,7 +42,7 @@
 </head>
 
 <body class="layui-card-body">
-<input th:value="${promotionid}" id="promotionId" type="hidden"/>
+<input th:value="${transactionId}" id="transactionId" type="hidden"/>
 <div id='promotion_add' class="layui-form">
     <div class="layui-inline">
 			<span class=" layui-inline">
@@ -55,8 +55,8 @@
 
     <div class="layui-row">
         <div class="layui-col-xs5" id="left" style="overflow-x: auto;">
-				<span th:each="mers : ${merchantAll}" style="display: inherit;margin-left: 5px;">
-					<input type="checkbox" name="like" th:title="${mers.merchantName}" th:value="${mers.id}" lay-skin="primary">
+				<span th:each="deps : ${departmentAll}" style="display: inherit;margin-left: 5px;">
+					<input type="checkbox" name="like" th:title="${deps.depName}" th:value="${deps.id}" lay-skin="primary">
 				</span>
         </div>
         <div class="layui-col-xs2" id="middle" style=" text-align:center;padding: 80px 0px;">

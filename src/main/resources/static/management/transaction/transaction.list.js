@@ -22,7 +22,7 @@ layui.use(['table', 'form', 'layer'], function () {
                             departments = departments + d.departmentInfos[i].depName + ";";
                         }
                     }
-                    return ;
+                    return departments;
                 }, title: '参与部门',width:'13%'},
             {
                 field: 'transactionScheme',
@@ -69,7 +69,7 @@ layui.use(['table', 'form', 'layer'], function () {
                 align: 'center',
                 toolbar: '#barTpl',
                 title: '操作',
-                width: '12 %'
+                // width: '12 %'
             }
         ]],
     });
@@ -112,9 +112,11 @@ function detail(pid,sign){
     var title = '';
 
     if(sign == "edit"){
-        title = '修改部门';
+        title = '修改事务';
     }
-
+    if(sign == "show"){
+        title = "查看事务"
+    }
     layer.open({
         type: 2,
         title:title,
@@ -131,7 +133,7 @@ function delete_goods(pid) {
     layer.confirm('确定要删除吗？', function (index) {
         layer.load(1);
         $.ajax({
-            url: "/department/delete?pid=" + pid,
+            url: "/transaction/delete?pid=" + pid,
             type: "GET",
             dataType: "JSON",
             success: function (data) {

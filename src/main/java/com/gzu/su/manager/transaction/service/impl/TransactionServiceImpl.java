@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author: jack.ye
@@ -45,6 +43,14 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    public PageResult<TransactionInfoVo> checkByPage(Integer startNum, Integer size, String tName) throws Exception {
+        PageResult<TransactionInfoVo> result = new PageResult<TransactionInfoVo>();
+        result.setData(transactionInfoMapper.checkByPage(startNum,size,tName));
+        result.setCount(transactionInfoMapper.checkByPageCount(tName));
+        return result;
+    }
+
+    @Override
     public int deleteByPrimaryKey(String pid) throws Exception {
         transactionInfoMapper.deleteByPrimaryKey(pid);
         transactionDepartmentMidMapper.deleteByTransactionId(pid);
@@ -62,7 +68,8 @@ public class TransactionServiceImpl implements TransactionService {
         transactionInfo.setTransactionContent(transactionDepVo.getTransactionContent());
         transactionInfo.setStatus(transactionDepVo.getStatus());
         transactionInfo.setStatusDesc(transactionDepVo.getStatusDesc());
-        transactionInfo.setTransactionScheme(transactionInfo.getTransactionScheme());
+        transactionInfo.setStatus("0");
+        transactionInfo.setTransactionScheme(transactionDepVo.getTransactionScheme());
         transactionInfo.setCreateTime(new Date());
         transactionInfo.setUpdateTime(new Date());
         String[] date = transactionDepVo.getTransactionDate().split("~");
@@ -98,7 +105,7 @@ public class TransactionServiceImpl implements TransactionService {
             setTransactionInfo.setUpdateTime(new Date());
             setTransactionInfo.setTransactionName(transactionDepVo.getTransactionName());
             setTransactionInfo.setStatusDesc(transactionDepVo.getStatusDesc());
-            setTransactionInfo.setStatus(transactionDepVo.getStatus());
+            setTransactionInfo.setStatus(transactionInfo.getStatus());
             setTransactionInfo.setTransactionScheme(transactionDepVo.getTransactionScheme());
             setTransactionInfo.setTransactionContent(transactionDepVo.getTransactionContent());
             transactionInfoMapper.updateByPrimaryKey(setTransactionInfo);
@@ -109,6 +116,7 @@ public class TransactionServiceImpl implements TransactionService {
                     mid.setId(UUID.randomUUID().toString().replace("-",""));
                     mid.setDepartmentId(depId);
                     mid.setTransactionId(transactionInfo.getId());
+                    mid.setCreateTime(new Date());
                     mid.setUpdateTime(new Date());
                     transactionDepartmentMidMapper.insert(mid);
                 }
@@ -128,11 +136,6 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<DepartmentInfo> findAllDepartment() throws Exception {
-        return departmentInfoMapper.findAllDepartment();
-    }
-
-    @Override
     public int saveTranactionInfo(TransactionInfo transactionInfo) throws Exception {
      return saveTranactionInfo(transactionInfo);
     }
@@ -140,6 +143,29 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionInfoVo findTransactionInfoVoById(String id) throws Exception {
         return transactionInfoMapper.selectTransactionInfoVo(id);
+    }
+
+    @Override
+    public Map<String, Object> findCheckDepartmentByPid(String pid, String searchName) throws Exception {
+        Map<String,Object> map = new HashMap<String,Object>();
+        List<DepartmentInfo> departmentAll = departmentInfoMapper.findAllDepartment(searchName);
+        List<DepartmentInfo> departmentInfos = new ArrayList<DepartmentInfo>();
+        if( !StringUtils.isEmpty(pid)){
+            departmentInfos = departmentInfoMapper.findDepartmentByPid(pid);
+            List<String> list = new ArrayList<String>();
+            for(DepartmentInfo departmentInfo : departmentInfos){
+                list.add(departmentInfo.getId());
+            }
+            for(DepartmentInfo departmentInfo :departmentAll){
+                departmentInfo.setIsCheck("0");
+                if(list.contains(departmentInfo.getId())){
+                    departmentInfo.setIsCheck("1");
+                }
+            }
+        }
+        map.put("departmentAll",departmentAll);
+        map.put("departmentInfos",departmentInfos);
+        return map;
     }
 
 

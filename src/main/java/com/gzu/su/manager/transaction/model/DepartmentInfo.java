@@ -1,6 +1,5 @@
-package com.gzu.su.manager.department.model;
+package com.gzu.su.manager.transaction.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DepartmentInfo {
@@ -18,14 +17,12 @@ public class DepartmentInfo {
 
     private Date updateTime;
 
-    private String isCheck;
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public String getDepName() {
@@ -33,7 +30,7 @@ public class DepartmentInfo {
     }
 
     public void setDepName(String depName) {
-        this.depName = depName == null ? null : depName.trim();
+        this.depName = depName;
     }
 
     public String getDepMinsterName() {
@@ -41,7 +38,7 @@ public class DepartmentInfo {
     }
 
     public void setDepMinsterName(String depMinsterName) {
-        this.depMinsterName = depMinsterName == null ? null : depMinsterName.trim();
+        this.depMinsterName = depMinsterName;
     }
 
     public String getDepMemberSum() {
@@ -49,7 +46,7 @@ public class DepartmentInfo {
     }
 
     public void setDepMemberSum(String depMemberSum) {
-        this.depMemberSum = depMemberSum == null ? null : depMemberSum.trim();
+        this.depMemberSum = depMemberSum;
     }
 
     public String getMinisterPhoneNu() {
@@ -57,32 +54,22 @@ public class DepartmentInfo {
     }
 
     public void setMinisterPhoneNu(String ministerPhoneNu) {
-        this.ministerPhoneNu = ministerPhoneNu == null ? null : ministerPhoneNu.trim();
+        this.ministerPhoneNu = ministerPhoneNu;
     }
 
-    public String getCreateTime() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return simpleDateFormat.format(createTime);
+    public Date getCreateTime() {
+        return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public String getUpdateTime() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return simpleDateFormat.format(updateTime);
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getIsCheck() {
-        return isCheck;
-    }
-
-    public void setIsCheck(String isCheck) {
-        this.isCheck = isCheck;
     }
 }

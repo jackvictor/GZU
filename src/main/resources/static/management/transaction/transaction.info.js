@@ -50,21 +50,7 @@
 		editor.$textElem.attr('contenteditable', false);
 		//$("#LAY_layedit_1").contents().find('body').attr("contenteditable","false");
 	}
-	
-	$.common.initUpload('promotion_upload',
-        function(res){
-			layer.closeAll('loading');
-			if(res.code == -1 || res.code == -2){
-				layer.msg(res.msg,{icon: 2});
-			}else{
-				if($("#img-list").find('.img-outer').length == 0){
-					$("#img-list").append('<img class="img-outer" style="height: 120px;width: 120px;" src="' + res.url +'" value="' + res.relativeUrl + '"><i class="layui-icon img-del">&#x1006;</i><input type="hidden" value="' + res.img + '" name="promotionImgMin">');
-				}else{
-					layer.msg('最多只能上传1张图片，请删除其他图片重新上传',{icon: 2});
-				}
-			}
-        }
-    );
+
 	$('body').on( 'click','.img-del',function(){
         $(this).parent().html("");
     })
@@ -77,7 +63,7 @@
 			area: ['750px', '540px'],
 			offset: ['5px'],
 			fixed: false, 
-			content: '/promotion/merchant?pid='+pId+'&sign='+pageSign,
+			content: '/transaction/department?pid='+pId+'&sign='+pageSign,
 			yes: function(index, layero){
 				var iframeWin = layero.find('iframe')[0];
 				var merchant_list = iframeWin.contentWindow.merchant_submit();
@@ -116,24 +102,11 @@
 			layer.msg('请选择至少一个商家', {icon: 5});
 			return false;
 		}
-		if(check_tag.length < 1){
-			layer.msg('请选择至少一个活动标签', {icon: 5});
-			return false;
-		}
-		
 		if(editor.txt.text().length > 2000 || editor.txt.text().length < 5){
 			layer.msg('活动内容5~2000字符', {icon: 5});
 			return false;
 		}
-		
-		var tagIdList = new Array()
-		if(check_tag.length > 0){
-			for(var i= 0; i < check_tag.length;i++){
-				var tagId = $(check_tag[i]).parent().find("input").val();
-				tagIdList[i] = tagId;
-			}
-		}
-		
+
 		var merIdList = new Array()
 		if(check_mer.length > 0){
 			for(var i= 0; i < check_mer.length;i++){
@@ -141,27 +114,12 @@
 				merIdList[i] = merId;
 			}
 		}
-		
-		obj['protags'] = tagIdList;
-		obj['promers'] = merIdList;
-		obj['promotionContent'] = editor.txt.html();
-		
-		
-		if($("#img-list").find('.img-outer').length == 0){
-			layer.msg('请上传一张活动图片', {icon: 5});
-			return false;
-		}else if($("#img-list").find('.img-outer').length > 1){
-			layer.msg('活动图片限一张', {icon: 5});
-			return false;
-		}
-		
-		var picture = $($('.img-outer')[0]).attr("value");
-		obj['promotionImg'] = picture;
-		
+		obj['depIds'] = merIdList;
+		obj['transactionContent'] = editor.txt.html();
 		layer.load(1);
 		$.ajax({
 		    type: "POST",
-		    url: "/promotion/savepro",
+		    url: "/transaction/insert",
 		    contentType: "application/json",
 		    data: JSON.stringify(obj), 
 		    dataType: "html",

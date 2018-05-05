@@ -180,13 +180,62 @@
     <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="TRANSACTION_CONTENT" jdbcType="LONGVARCHAR" property="transactionContent" />
-    <collection property="departmentInfos" ofType="com.gzu.su.manager.department.model.DepartmentInfo">
-      <result column="DEP_NAME" property="depName" jdbcType="VARCHAR"></result>
-    </collection>
+      <collection property="departmentInfos" ofType="com.gzu.su.manager.transaction.model.DepartmentInfo">
+          <result column="DEP_NAME" property="depName" jdbcType="VARCHAR"></result>
+      </collection>
   </resultMap>
 
   <select id="findByPage" resultMap="PageResultMap">
-    SELECT
+      SELECT
+      INFO.ID,
+      INFO.TRANSACTION_NAME,
+      INFO.STATUS_DESC,
+      INFO.TRANSACTION_SCHEME,
+      INFO.TRANSACTION_FINISH,
+      INFO.TRANSACTION_BEGIN,
+      DEP.DEP_NAME,
+      INFO.CREATE_TIME,
+      INFO.UPDATE_TIME,
+      INFO.STATUS,
+      INFO.TRANSACTION_CONTENT
+      FROM(
+      SELECT *
+      FROM
+      gzusu_manager_transaction_info
+      <if test="tName != null and tName != ''">
+         INFO.TRANSACTION_NAME  LIKE CONCAT('%',#{tName,jdbcType=VARCHAR},'%')
+      </if>
+      )INFO
+      LEFT JOIN(
+      SELECT
+      DEP.ID,
+      DEP.DEP_NAME,
+      DEP.CREATE_TIME AS DEPCREATE_TIME,
+      DEP.UPDATE_TIME AS DEPUPDATE_TIME,
+      MID.TRANSACTION_ID
+      FROM gzusu_manager_department_info DEP
+      LEFT JOIN
+      gzusu_manager_transaction_department_mid MID ON MID.DEPARTMENT_ID = DEP.ID
+      ) DEP ON INFO.ID = DEP.TRANSACTION_ID
+      order by INFO.UPDATE_TIME DESC
+  </select>
+
+    <select id="findByPageCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(d.ID)
+        FROM (
+        SELECT
+        *
+        FROM
+        gzusu_manager_transaction_info INFO
+        <if test="tName != null and tName != ''">
+            WHERE INFO.TRANSACTION_NAME  LIKE CONCAT('%',#{tName,jdbcType=VARCHAR},'%')
+        </if>
+        )d
+    </select>
+
+    <select id="checkByPage" resultMap="PageResultMap">
+       SELECT
     INFO.ID,
     INFO.TRANSACTION_NAME,
     INFO.STATUS_DESC,
@@ -198,25 +247,46 @@
     INFO.UPDATE_TIME,
     INFO.STATUS,
     INFO.TRANSACTION_CONTENT
+    FROM(
+    SELECT *
     FROM
-    gzusu_manager_transaction_info INFO
-    <if test="tName != null and tName != ''">
-      WHERE INFO.TRANSACTION_NAME  LIKE CONCAT('%',#{tName,jdbcType=VARCHAR},'%')
-    </if>
+    gzusu_manager_transaction_info
+    WHERE STATUS ="0"
+        <if test="tName != null and tName != ''">
+            AND INFO.TRANSACTION_NAME  LIKE CONCAT('%',#{tName,jdbcType=VARCHAR},'%')
+       </if>
+    )INFO
     LEFT JOIN(
     SELECT
+    DEP.ID,
     DEP.DEP_NAME,
+    DEP.CREATE_TIME AS DEPCREATE_TIME,
+    DEP.UPDATE_TIME AS DEPUPDATE_TIME,
     MID.TRANSACTION_ID
     FROM gzusu_manager_department_info DEP
     LEFT JOIN
     gzusu_manager_transaction_department_mid MID ON MID.DEPARTMENT_ID = DEP.ID
     ) DEP ON INFO.ID = DEP.TRANSACTION_ID
     order by INFO.UPDATE_TIME DESC
-    LIMIT #{startNum},#{size}
-  </select>
+    </select>
+
+    <select id="checkByPageCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(d.ID)
+        FROM (
+        SELECT
+        *
+        FROM
+        gzusu_manager_transaction_info INFO
+        WHERE INFO.STATUS = "0"
+        <if test="tName != null and tName != ''">
+            AND INFO.TRANSACTION_NAME  LIKE CONCAT('%',#{tName,jdbcType=VARCHAR},'%')
+        </if>
+        )d
+    </select>
 
   <select id="selectTransactionInfoVo" resultMap="PageResultMap">
-    SELECT
+SELECT
     INFO.ID,
     INFO.TRANSACTION_NAME,
     INFO.STATUS_DESC,
@@ -228,33 +298,23 @@
     INFO.UPDATE_TIME,
     INFO.STATUS,
     INFO.TRANSACTION_CONTENT
+    FROM(
+    SELECT *
     FROM
-    gzusu_manager_transaction_info INFO
-    WHERE INFO.ID = #{id}
+    gzusu_manager_transaction_info
+    WHERE ID = #{id}
+    )INFO
     LEFT JOIN(
     SELECT
+    DEP.ID,
     DEP.DEP_NAME,
+    DEP.CREATE_TIME AS DEPCREATE_TIME,
+    DEP.UPDATE_TIME AS DEPUPDATE_TIME,
     MID.TRANSACTION_ID
     FROM gzusu_manager_department_info DEP
     LEFT JOIN
     gzusu_manager_transaction_department_mid MID ON MID.DEPARTMENT_ID = DEP.ID
     ) DEP ON INFO.ID = DEP.TRANSACTION_ID
-    order by INFO.UPDATE_TIME DESC
-  </select>
-
-
-  <select id="findByPageCount" resultType="java.lang.Integer">
-    SELECT
-    COUNT(d.ID)
-    FROM (
-    SELECT
-    *
-    FROM
-    gzusu_manager_transaction_info INFO
-    <if test="tName != null and tName != ''">
-      WHERE INFO.TRANSACTION_NAME  LIKE CONCAT('%',#{tName,jdbcType=VARCHAR},'%')
-    </if>
-    )d
   </select>
 
   <select id="findByName" resultMap="BaseResultMap">

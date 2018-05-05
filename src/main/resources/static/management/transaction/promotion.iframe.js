@@ -42,7 +42,7 @@ layui.use(['form', 'laydate','jquery' , 'layer'], function() {
 		//调用后台
 		
 		$.ajax({
-            url: "/promotion/searchmer",
+            url: "/transaction/searchDepart",
             type: "GET",
             dataType: "JSON",
             data:{pid:promotionID,searchname:searchName},

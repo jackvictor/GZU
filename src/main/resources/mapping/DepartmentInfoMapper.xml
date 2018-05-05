@@ -153,10 +153,21 @@
     </if>
   )g
   </select>
-  
+
+  <select id="findDepartmentByPid" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    gzusu_manager_department_info info,gzusu_manager_transaction_department_mid mid
+    WHERE info.id = mid.DEPARTMENT_ID
+    AND mid.TRANSACTION_ID = #{pid}
+  </select>
   <select id="findAllDepartment" resultMap="BaseResultMap">
     SELECT *
     FROM
     gzusu_manager_department_info
+    <if test="searchName != null and searchName !=''">
+      WHERE DEP_NAME LIKE CONCAT('%',#{searchName,jdbcType=VARCHAR},'%')
+    </if>
   </select>
 </mapper>
