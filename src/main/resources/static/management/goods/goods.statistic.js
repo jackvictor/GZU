@@ -84,7 +84,7 @@ function do_lend(pid,sign){
     var title = '';
 
     if(sign == "lend"){
-        title = '修改物品';
+        title = '借记物品';
     }
 
     layer.open({

@@ -232,12 +232,10 @@
       USER_STATUS = #{userStatus,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-
-  <resultMap id="UserPageMap" type="com.gzu.su.manager.user.model.UserInfo">
-    <id column="ID" jdbcType="VARCHAR" property="id" />
+  <resultMap id="UserPageMap" type="com.gzu.su.manager.user.model.vo.UserPage">
+    <id column="ID" jdbcType="VARCHAR" property="uId" />
     <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
     <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
-    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
     <result column="USER_SEX" jdbcType="VARCHAR" property="userSex" />
     <result column="USER_POSITION" jdbcType="VARCHAR" property="userPosition" />
     <result column="USER_DEPARTMENT_NAME" jdbcType="VARCHAR" property="userDepartmentName" />
@@ -247,17 +245,15 @@
     <result column="USER_PHONE_NU" jdbcType="VARCHAR" property="userPhoneNu" />
     <result column="USER_START_TIME" jdbcType="TIMESTAMP" property="userStartTime" />
     <result column="USER_STATUS" jdbcType="VARCHAR" property="userStatus" />
-    <association property="userRoleMid" javaType="com.gzu.su.manager.user.model.RoleFunMid">
-      <result column="roleName" property="roleName"/>
-    </association>
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
   </resultMap>
   <select id="findByPage" resultMap="UserPageMap">
     select
     a.ID,
     a.USER_ID,
     a.ROLE_ID,
-    a.USER_NAME,
     ur.ROLE_NAME,
+    a.USER_NAME,
     a.USER_POSITION,
     a.USER_DEPARTMENT_NAME,
     a.USER_MAJOR,
@@ -271,6 +267,7 @@
     ui.ID,
     ui.USER_ID,
     ui.ROLE_ID,
+    ui.USER_SEX,
     ui.USER_NAME,
     ui.USER_POSITION,
     ui.USER_DEPARTMENT_NAME,
@@ -282,11 +279,9 @@
     ui.USER_STATUS
     FROM
     gzusu_manager_user_info ui
-    WHERE
-    ui.USER_ID != #{sysUser}
-    and ui.ID != #{uId}
-    <if test="userName !=null and userName != ''">
-      and ui.USER_NAME LIKE CONCAT('%',#{uName},'%')
+    <if test="uName !=null and uName != ''">
+      WHERE
+      ui.USER_NAME LIKE CONCAT('%',#{uName},'%')
       OR ui.USER_DEPARTMENT_NAME LIKE CONCAT('%',#{uName},'%')
       OR ui.USER_POSITION LIKE CONCAT('%',#{uName},'%')
       OR ui.USER_PHONE_NU LIKE CONCAT('%',#{uName},'%')
@@ -302,36 +297,41 @@
     SELECT
     COUNT(u.ID)
     FROM(
-    SELECT
-    ui.ID,
-    ui.USER_ID,
-    ui.ROLE_ID,
-    ui.USER_NAME,
-    ui.USER_POSITION,
-    ui.USER_DEPARTMENT_NAME,
-    ui.USER_MAJOR,
-    ui.USER_GRADE,
-    ui.E_MAIL,
-    ui.USER_PHONE_NU,
-    ui.USER_START_TIME,
-    ui.USER_STATUS
-    FROM
-    gzusu_manager_user_info ui
-    WHERE
-    ui.USER_ID != #{sysUser}
-    and ui.ID != #{uId}
-    <if test="userName !=null and userName != ''">
-      and ui.USER_NAME LIKE CONCAT('%',#{uName},'%')
-      OR ui.USER_DEPARTMENT_NAME LIKE CONCAT('%',#{uName},'%')
-      OR ui.USER_POSITION LIKE CONCAT('%',#{uName},'%')
-      OR ui.USER_PHONE_NU LIKE CONCAT('%',#{uName},'%')
-    </if>
+      SELECT
+      ui.ID,
+      ui.USER_ID,
+      ui.ROLE_ID,
+      ui.USER_SEX,
+      ui.USER_NAME,
+      ui.USER_POSITION,
+      ui.USER_DEPARTMENT_NAME,
+      ui.USER_MAJOR,
+      ui.USER_GRADE,
+      ui.E_MAIL,
+      ui.USER_PHONE_NU,
+      ui.USER_START_TIME,
+      ui.USER_STATUS
+      FROM
+      gzusu_manager_user_info ui
+      <if test="uName !=null and uName != ''">
+          WHERE
+          ui.USER_NAME LIKE CONCAT('%',#{uName},'%')
+          OR ui.USER_DEPARTMENT_NAME LIKE CONCAT('%',#{uName},'%')
+          OR ui.USER_POSITION LIKE CONCAT('%',#{uName},'%')
+          OR ui.USER_PHONE_NU LIKE CONCAT('%',#{uName},'%')
+      </if>
     )u
   </select>
+
+    <select id="checkUserName" resultType="java.lang.Integer">
+        select COUNT(ui.ID) from gzusu_manager_user_info ui
+        where ui.USER_ID = #{userId}
+    </select>
 
   <select id="loginCheckUserName" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
     FROM su_manager.gzusu_manager_user_info
     WHERE USER_ID = #{userId}
   </select>
+
 </mapper>

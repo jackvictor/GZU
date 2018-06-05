@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>查看用户</title>
+		<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" />
+	</head>
+
+	<body class="layui-card-body">
+		<form class="layui-form">
+			<input name="id" type="hidden" id="id" th:value="${user.id}"/>
+			<input type="hidden" th:value="${user.roleId}" id="h_roleId">
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户名</label>
+				<div class="layui-input-block">
+					<input type="text" th:placeholder="${user.userId}" autocomplete="off" class="layui-input" readonly>
+					<input type="hidden" name="userId" th:value="${user.userId}">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">姓名</label>
+				<div class="layui-input-block">
+					<input type="text" placeholder="请输入姓名" name="userName" lay-verify="userName" th:value="${user.userName}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">邮箱</label>
+				<div class="layui-input-block">
+					<input type="text" placeholder="请输入邮箱" name="eMail" lay-verify="eMail" th:value="${user.eMail}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色</label>
+				<div class="layui-input-block">
+				<select id="role-slect" name="roleId" lay-verify="roleId" disabled="disabled">
+					<option value=''>-请选择-</option>
+					<option th:each="ro:${roles}" th:value="${ro.id}" th:text="${ro.roleName}"></option>
+				</select>
+			</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">性别</label>
+				<div class="layui-input-block" th:if="${user.sex} eq '0'">
+					<input type="radio" name="sex" value="0" title="男" checked disabled="disabled">
+					<input type="radio" name="sex" value="1" title="女" disabled="disabled">
+				</div>
+				<div class="layui-input-block" th:if="${user.sex} eq '1'">
+					<input type="radio" name="sex" value="0" title="男" disabled="disabled">
+					<input type="radio" name="sex" value="1" title="女" checked disabled="disabled">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">状态</label>
+				<div class="layui-input-block" th:if="${user.userStatus} eq '0'" >
+					<input type="checkbox" name="userStatus" value="0" lay-skin="switch" checked disabled="disabled">
+				</div>
+				<div class="layui-input-block" th:if="${user.userStatus} eq '1'">
+					<input type="checkbox" name="userStatus" value="1" lay-skin="switch" disabled="disabled">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit lay-filter="btnSubmit" id="btnSubmit">修改</button>
+					<button type="reset" class="layui-btn layui-btn-primary" id="btnCancel">关闭</button>
+				</div>
+			</div>
+		</form>
+		<script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+		<script src="/static/layui/layui.all.js"></script>
+		<script src="/static/management/user/user.account.js"></script>
+	</body>
+
+</html>

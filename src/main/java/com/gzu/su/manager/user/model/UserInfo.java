@@ -3,39 +3,44 @@ package com.gzu.su.manager.user.model;
 import java.util.Date;
 
 public class UserInfo {
+    //用户的id
     private String id;
-
+    //用户名
     private String userId;
-
+    //密码摘要
     private String encryptPassword;
-
+    //随机盐
     private String randomSalt;
-
+    //用户姓名
     private String userName;
-
+    //用户角色id
     private String roleId;
-
+    //用户性别
     private String userSex;
-
+    //用户职位
     private String userPosition;
-
+    //用户所在部门
     private String userDepartmentName;
-
+    //用户所属专业
     private String userMajor;
-
+    //用户所在年级
     private String userGrade;
-
+    //用户邮箱
     private String eMail;
-
+    //用户电话
     private String userPhoneNu;
-
+    //用户入户时间
     private Date userStartTime;
-
+    //创建时间
     private Date createTime;
-
+    //更新时间
     private Date updateTime;
-
+    //用户状态
     private String userStatus;
+    //是否选中
+    private boolean isCheck;
+    //自己修改
+    private String mine;
 
     public String getId() {
         return id;
@@ -171,5 +176,21 @@ public class UserInfo {
 
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus == null ? null : userStatus.trim();
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
+    public String getMine() {
+        return mine;
+    }
+
+    public void setMine(String mine) {
+        this.mine = mine;
     }
 }

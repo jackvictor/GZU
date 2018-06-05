@@ -1,28 +1,65 @@
 package com.gzu.su.manager.user.model;
 
 import java.util.Date;
+import java.util.List;
 
+/**
+ *
+ * @Class SysFun
+ * @author mli8
+ * @date Mar 20, 20181:25:29 PM
+ * @Des 系统功能
+ * @since JDK 1.8
+ */
 public class SysFun {
+    //记录ID
     private String id;
 
+    //功能名称
     private String funName;
 
+    //功能图标
     private String funIcon;
 
-    private String yfunUrl;
+    //功能页面地址
+    private String funUrl;
 
+    //父节点ID
     private String parentId;
 
+    //创建时间
     private Date createTime;
 
+    //修改时间
     private Date updateTime;
+
+    //是否选中
+    private boolean isCheck;
+
+    private List<SysFun> sysFuns;
+
+    public List<SysFun> getSysFuns() {
+        return sysFuns;
+    }
+
+    public void setSysFuns(List<SysFun> sysFuns) {
+        this.sysFuns = sysFuns;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean isCheck) {
+        this.isCheck = isCheck;
+    }
 
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public String getFunName() {
@@ -30,7 +67,7 @@ public class SysFun {
     }
 
     public void setFunName(String funName) {
-        this.funName = funName == null ? null : funName.trim();
+        this.funName = funName;
     }
 
     public String getFunIcon() {
@@ -38,15 +75,15 @@ public class SysFun {
     }
 
     public void setFunIcon(String funIcon) {
-        this.funIcon = funIcon == null ? null : funIcon.trim();
+        this.funIcon = funIcon;
     }
 
-    public String getYfunUrl() {
-        return yfunUrl;
+    public String getFunUrl() {
+        return funUrl;
     }
 
-    public void setYfunUrl(String yfunUrl) {
-        this.yfunUrl = yfunUrl == null ? null : yfunUrl.trim();
+    public void setFunUrl(String funUrl) {
+        this.funUrl = funUrl;
     }
 
     public String getParentId() {
@@ -54,7 +91,7 @@ public class SysFun {
     }
 
     public void setParentId(String parentId) {
-        this.parentId = parentId == null ? null : parentId.trim();
+        this.parentId = parentId;
     }
 
     public Date getCreateTime() {

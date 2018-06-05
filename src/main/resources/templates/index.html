@@ -1,171 +1,262 @@
-<html><head>
-		<meta charset="utf-8">
-		<meta content="text/html;charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>学生会管理平台</title>
-		<link rel="stylesheet" href="/static/layui/css/layui.css">
-		<link rel="stylesheet" href="/static/css/index.css">
-	</head>
+<!--<html><head>-->
+		<!--<meta charset="utf-8">-->
+		<!--<meta content="text/html;charset=UTF-8">-->
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+		<!--<title>学生会管理平台</title>-->
+		<!--<link rel="stylesheet" href="/static/layui/css/layui.css">-->
+		<!--<link rel="stylesheet" href="/static/css/index.css">-->
+	<!--</head>-->
 
-	<body class="layui-layout-body">
-		<div class="layui-layout layui-layout-admin">
-			<div class="layui-header">
-				<div class="layui-logo">学生会管理</div>
-				<!--右上角头像区域-->
-				<ul class="layui-nav layui-layout-right">
-					<li class="layui-nav-item" style="">
-						<a href="javascript:;">
-							<img src="http://mikepeng.cn/header.jpg" class="layui-nav-img"> Mike
-						<span class="layui-nav-more"></span></a>
-						<dl class="layui-nav-child layui-anim layui-anim-upbit">
-							<dd>
-								<a href="">基本资料</a>
-							</dd>
-							<dd>
-								<a href="">安全设置</a>
-							</dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<a href="">退出</a>
-					</li>
-				<span class="layui-nav-bar" style="left: 20px; top: 55px; width: 0px; opacity: 0;"></span></ul>
-			</div>
+	<!--<body class="layui-layout-body">-->
+		<!--<div class="layui-layout layui-layout-admin">-->
+			<!--<div class="layui-header">-->
+				<!--<div class="layui-logo"><img width="70px" height="70px" src="static/img/logo1.png">学生会管理</div>-->
+				<!--&lt;!&ndash;右上角头像区域&ndash;&gt;-->
+				<!--<ul class="layui-nav layui-layout-right">-->
+					<!--<li class="layui-nav-item" style="">-->
+						<!--<dl class="layui-nav-child layui-anim layui-anim-upbit">-->
+							<!--<dd>-->
+								<!--<a href="">基本资料</a>-->
+							<!--</dd>-->
+							<!--<dd>-->
+								<!--<a href="">安全设置</a>-->
+							<!--</dd>-->
+						<!--</dl>-->
+					<!--</li>-->
+					<!--<li class="layui-nav-item">-->
+						<!--<a href="">退出</a>-->
+					<!--</li>-->
+				<!--<span class="layui-nav-bar" style="left: 20px; top: 55px; width: 0px; opacity: 0;"></span>-->
+                <!--</ul>-->
+			<!--</div>-->
 
-			<div class="layui-side layui-bg-black">
-				<div class="layui-side-scroll">
-					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					<ul class="layui-nav layui-nav-tree" lay-filter="test">
-						<li class="layui-nav-item layui-nav-itemed">
-							<a href="javascript:;" class="skip" data-url="home/home" data-id="首页" data-title="首页"><i class="layui-icon"></i> 首页</a>
-						</li>
-						<li class="layui-nav-item" style="">
-							<a class="" href="javascript:;"><i class="layui-icon"></i> 物品管理<span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;" class="skip" data-url="goods/list" data-id="物品维护" data-title="物品维护">物品维护</a>
-								</dd>
-								<dd>
-									<a href="javascript:;" class="skip" data-url="goods/statistic" data-id="统计报表" data-title="统计报表">物品借还</a>
-								</dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item" style="">
-							<a href="javascript:;"><i class="layui-icon"></i> 事务管理<span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;" class="skip" data-url="transaction/list" data-id="事务列表" data-title="事务列表">事务列表</a>
-								</dd>
-								<dd>
-									<a href="javascript:;" class="skip" data-url="transaction/check_list" data-id="事务审核" data-title="事务审核">事务审核</a>
-								</dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item" style="">
-							<a href="javascript:;"><i class="layui-icon"></i> 应用配置<span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;" class="skip">字典配置</a>
-								</dd>
-								<dd>
-									<a href="javascript:;">功能菜单</a>
-								</dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item" style="">
-							<a href="javascript:;"><i class="layui-icon"></i> 部门管理<span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="javascript:;" class="skip" data-url="/department/list" data-id="部门列表" data-title="用户列表">用户列表</a>
-								</dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item layui-nav-itemed" style="">
-							<a href="javascript:;"><i class="layui-icon"></i>文件管理<span class="layui-nav-more"></span></a>
-							<dl class="layui-nav-child">
-								<dd class="">
-									<a href="javascript:;" class="skip" data-url="log/log_list" data-id="日志列表" data-title="日志列表">日志列表</a>
-								</dd>
-							</dl>
-						</li>
-					<span class="layui-nav-bar" style="top: 332.5px; height: 0px; opacity: 0;"></span></ul>
-				</div>
-			</div>
+			<!--<div class="layui-side layui-bg-black">-->
+				<!--<div class="layui-side-scroll">-->
+					<!--&lt;!&ndash; 左侧导航区域（可配合layui已有的垂直导航） &ndash;&gt;-->
+					<!--<ul class="layui-nav layui-nav-tree" lay-filter="test">-->
+						<!--<li class="layui-nav-item layui-nav-itemed">-->
+							<!--<a href="javascript:;" class="skip" data-url="home/home" data-id="首页" data-title="首页"><i class="layui-icon"></i> 首页</a>-->
+						<!--</li>-->
+						<!--<li class="layui-nav-item" style="">-->
+							<!--<a class="" href="javascript:;"><i class="layui-icon">&#xe657;</i> 物品管理<span class="layui-nav-more"></span></a>-->
+							<!--<dl class="layui-nav-child">-->
+								<!--<dd>-->
+									<!--<a href="javascript:;" class="skip" data-url="goods/list" data-id="物品维护" data-title="物品维护">物品维护</a>-->
+								<!--</dd>-->
+								<!--<dd>-->
+									<!--<a href="javascript:;" class="skip" data-url="goods/statistic" data-id="物品借还" data-title="物品借还">物品借还</a>-->
+								<!--</dd>-->
+							<!--</dl>-->
+						<!--</li>-->
+						<!--<li class="layui-nav-item" style="">-->
+							<!--<a href="javascript:;"><i class="layui-icon">&#xe672;</i> 事务管理<span class="layui-nav-more"></span></a>-->
+							<!--<dl class="layui-nav-child">-->
+								<!--<dd>-->
+									<!--<a href="javascript:;" class="skip" data-url="transaction/list" data-id="事务列表" data-title="事务列表">事务列表</a>-->
+								<!--</dd>-->
+								<!--<dd>-->
+									<!--<a href="javascript:;" class="skip" data-url="transaction/check_list" data-id="事务审核" data-title="事务审核">事务审核</a>-->
+								<!--</dd>-->
+							<!--</dl>-->
+						<!--</li>-->
+						<!--<li class="layui-nav-item" style="">-->
+							<!--<a href="javascript:;"><i class="layui-icon">&#xe65e;</i> 财务管理<span class="layui-nav-more"></span></a>-->
+							<!--<dl class="layui-nav-child">-->
+								<!--<dd>-->
+									<!--<a href="javascript:;" class="skip" data-url="finance/list" data-id="财务列表" data-title="财务列表">财务列表</a>-->
+								<!--</dd>-->
+								<!--<dd>-->
+									<!--<a href="javascript:;" class="skip" data-url="finance/check_list" data-id="财务审核" data-title="财务审核">财务审核</a>-->
+								<!--</dd>-->
+							<!--</dl>-->
+						<!--</li>-->
+						<!--<li class="layui-nav-item" style="">-->
+							<!--<a href="javascript:;"><i class="layui-icon"></i> 部门管理<span class="layui-nav-more"></span></a>-->
+							<!--<dl class="layui-nav-child">-->
+								<!--<dd>-->
+									<!--<a href="javascript:;" class="skip" data-url="/department/list" data-id="部门列表" data-title="部门列表">部门、列表</a>-->
+								<!--</dd>-->
+							<!--</dl>-->
+						<!--</li>-->
+						<!--<li class="layui-nav-item layui-nav-itemed" style="">-->
+							<!--<a href="javascript:;"><i class="layui-icon">&#xe770;</i>用户管理<span class="layui-nav-more"></span></a>-->
+							<!--<dl class="layui-nav-child">-->
+								<!--<dd class="">-->
+									<!--<a href="javascript:;" class="skip" data-url="user/ulist" data-id="用户列表" data-title="用户列表">用户列表</a>-->
+								<!--</dd>-->
+							<!--</dl>-->
+							<!--<dl class="layui-nav-child">-->
+								<!--<dd class="">-->
+									<!--<a href="javascript:;" class="skip" data-url="role/rlist" data-id="角色列表" data-title="角色列表">角色列表</a>-->
+								<!--</dd>-->
+							<!--</dl>-->
 
-			<!-- 右边内容区域 -->
-			<div class="layui-body layui-form">
-				<div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true" overflow="">
-					<ul class="layui-tab-title">
-						<li class="layui-this" lay-id="首页">首页<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li>
+						<!--</li>-->
+					<!--<span class="layui-nav-bar" style="top: 332.5px; height: 0px; opacity: 0;"></span></ul>-->
+				<!--</div>-->
+			<!--</div>-->
 
-					<i lay-stope="tabmore" class="layui-icon"></i></span></ul>
-					<div class="layui-tab-content">
-						<div class="layui-tab-item">
-							<iframe src="home/home" scrolling="yes" width="100%" height="100%" frameborder="0"></iframe>
-						</div>
-				</div>
-			</div>
-		</div>
-		</div>
-		<script src="/static/layui/layui.js"></script>
-		<script type="text/javascript">
-			layui.use('element', function() {
-				var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-				var $ = layui.jquery;
+			<!--&lt;!&ndash; 右边内容区域 &ndash;&gt;-->
+			<!--<div class="layui-body layui-form">-->
+				<!--<div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowclose="true" overflow="">-->
+					<!--<ul class="layui-tab-title">-->
+						<!--<li class="layui-this" lay-id="首页">首页<i class="layui-icon layui-unselect layui-tab-close">ဆ</i></li>-->
 
-				//触发事件
-				var active = {
-					//在这里给active绑定几项事件，后面可通过active调用这些事件
-					tabAdd: function(url, id, name) {
-						//新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值
-						//关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
-						element.tabAdd('demo', {
-							title: name,
-							content: '<iframe data-frameid="' + id + '" scrolling="auto" frameborder="0" src="' + url + '.html" style="width:100%;height:99%;"></iframe>',
-							id: id //规定好的id
-						})
-					},
-					tabChange: function(id) {
-						//切换到指定Tab项
-						element.tabChange('demo', id); //根据传入的id传入到指定的tab项
-					},
-					tabDelete: function(id) {
-						element.tabDelete("demo", id); //删除
-					},
-					tabDeleteAll: function(ids) { //删除所有
-						$.each(ids, function(i, item) {
-							element.tabDelete("demo", item); //ids是一个数组，里面存放了多个id，调用tabDelete方法分别删除
-						})
-					}
-				};
+					<!--<i lay-stope="tabmore" class="layui-icon"></i></span></ul>-->
+					<!--<div class="layui-tab-content">-->
+						<!--<div class="layui-tab-item">-->
+							<!--<iframe src="home/home" scrolling="yes" width="100%" height="100%" frameborder="0"></iframe>-->
+						<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--</div>-->
+		<!--<script src="/static/layui/layui.js"></script>-->
+		<!--<script type="text/javascript">-->
+			<!--layui.use('element', function() {-->
+				<!--var element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块-->
+				<!--var $ = layui.jquery;-->
 
-				//当点击有site-demo-active属性的标签时，即左侧菜单栏中内容 ，触发点击事件
-				$('.skip').on('click', function() {
-					var dataid = $(this);
+				<!--//触发事件-->
+				<!--var active = {-->
+					<!--//在这里给active绑定几项事件，后面可通过active调用这些事件-->
+					<!--tabAdd: function(url, id, name) {-->
+						<!--//新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值-->
+						<!--//关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分-->
+						<!--element.tabAdd('demo', {-->
+							<!--title: name,-->
+							<!--content: '<iframe data-frameid="' + id + '" scrolling="auto" frameborder="0" src="' + url + '.html" style="width:100%;height:99%;"></iframe>',-->
+							<!--id: id //规定好的id-->
+						<!--})-->
+					<!--},-->
+					<!--tabChange: function(id) {-->
+						<!--//切换到指定Tab项-->
+						<!--element.tabChange('demo', id); //根据传入的id传入到指定的tab项-->
+					<!--},-->
+					<!--tabDelete: function(id) {-->
+						<!--element.tabDelete("demo", id); //删除-->
+					<!--},-->
+					<!--tabDeleteAll: function(ids) { //删除所有-->
+						<!--$.each(ids, function(i, item) {-->
+							<!--element.tabDelete("demo", item); //ids是一个数组，里面存放了多个id，调用tabDelete方法分别删除-->
+						<!--})-->
+					<!--}-->
+				<!--};-->
 
-					//这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
-					if($(".layui-tab-title li[lay-id]").length <= 0) {
-						//如果比零小，则直接打开新的tab项
-						active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));
-					} else {
-						//否则判断该tab项是否以及存在
+				<!--//当点击有site-demo-active属性的标签时，即左侧菜单栏中内容 ，触发点击事件-->
+				<!--$('.skip').on('click', function() {-->
+					<!--var dataid = $(this);-->
 
-						var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有
-						$.each($(".layui-tab-title li[lay-id]"), function() {
-							//如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
-							if($(this).attr("lay-id") == dataid.attr("data-id")) {
-								isData = true;
-							}
-						})
-						if(isData == false) {
-							//标志为false 新增一个tab项
-							active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));
-						}
-					}
-					//最后不管是否新增tab，最后都转到要打开的选项页面上
-					active.tabChange(dataid.attr("data-id"));
-				});
-			});
-		</script>
-	</body>
+					<!--//这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目-->
+					<!--if($(".layui-tab-title li[lay-id]").length <= 0) {-->
+						<!--//如果比零小，则直接打开新的tab项-->
+						<!--active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));-->
+					<!--} else {-->
+						<!--//否则判断该tab项是否以及存在-->
+
+						<!--var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有-->
+						<!--$.each($(".layui-tab-title li[lay-id]"), function() {-->
+							<!--//如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开-->
+							<!--if($(this).attr("lay-id") == dataid.attr("data-id")) {-->
+								<!--isData = true;-->
+							<!--}-->
+						<!--})-->
+						<!--if(isData == false) {-->
+							<!--//标志为false 新增一个tab项-->
+							<!--active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));-->
+						<!--}-->
+					<!--}-->
+					<!--//最后不管是否新增tab，最后都转到要打开的选项页面上-->
+					<!--active.tabChange(dataid.attr("data-id"));-->
+				<!--});-->
+			<!--});-->
+		<!--</script>-->
+        <!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>学生会管理平台</title>
+    <link rel="stylesheet" href="static/layui/css/layui.css">
+    <link rel="stylesheet" href="static/css/index.css">
+    <style>
+        .layui-tab ul.layui-tab-title li:nth-child(1) i {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo"><img width="70px" height="70px" src="static/img/logo1.png">学生会管理</div>
+
+        <!--右上角头像区域-->
+        <input type="hidden" th:value="${user_account.id}"  id="user_id"/>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;"id="user_name" th:text="${user_account.userName}">
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="javascript:;" id="user_message">基本资料</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;" id="reset_pwd">修改密码</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="/logout">退出</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+						<span th:each="prole : ${role_list}">
+							<span th:if="${#lists.isEmpty(prole.sysFuns)}">
+								<li class="layui-nav-item layui-nav-itemed">
+									<a href="javascript:;" class="skip" th:data-url="${prole.funUrl}" th:data-id="${prole.id}" th:data-title="${prole.funName}"><i class="layui-icon" th:html="${prole.funIcon}"></i><span th:text="${prole.funName}"></span></a>
+								</li>
+							</span>
+							<span th:if="${not #lists.isEmpty(prole.sysFuns)}">
+								<li class="layui-nav-item">
+									<a class="" href="javascript:;"><i class="layui-icon" th:html="${prole.funIcon}"></i><span th:text="${prole.funName}"></span></a>
+									<dl class="layui-nav-child">
+										<dd th:each="crole : ${prole.sysFuns}">
+											<a href="javascript:;" class="skip" th:data-url="${crole.funUrl}" th:data-id="${crole.id}" th:data-title="${crole.funName}"><span th:text="${crole.funName}"></span></a>
+										</dd>
+									</dl>
+								</li>
+							</span>
+						</span>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 右边内容区域 -->
+    <div class="layui-body layui-form">
+        <div class="layui-tab layui-tab-brief" lay-filter="demo" lay-allowClose="true">
+            <ul class="layui-tab-title">
+                <li class="layui-this" lay-id="1002">首页</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="home/home" style="width:100%;height:85%;" scrolling="auto" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="static/layui/layui.all.js"></script>
+<script src="static/management/index/index.js"></script>
+</body>
 </html>
+

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @Class SessionInterceptor
- * @author mli8
+ * @author jack.ye
  * @date Mar 21, 20183:16:15 PM
  * @Des
  * @since JDK 1.8

@@ -59,7 +59,7 @@
 		layer.open({
 			type: 2,
 			//skin: 'layui-layer-rim',
-			title:'添加商家',
+			title:'添加部门',
 			area: ['750px', '540px'],
 			offset: ['5px'],
 			fixed: false, 
@@ -99,7 +99,7 @@
 		var check_mer = $("#promotion_merchant").find("button.layui-btn.layui-btn-sm.layui-btn-disabled");
 		
 		if(check_mer.length < 1){
-			layer.msg('请选择至少一个商家', {icon: 5});
+			layer.msg('请选择至少一个部门', {icon: 5});
 			return false;
 		}
 		if(editor.txt.text().length > 2000 || editor.txt.text().length < 5){

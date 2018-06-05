@@ -5,6 +5,7 @@ import com.gzu.su.manager.common.response.MapResult;
 import com.gzu.su.manager.common.security.SessionInterceptor;
 import com.gzu.su.manager.user.model.SysFun;
 import com.gzu.su.manager.user.model.UserInfo;
+import com.gzu.su.manager.user.service.SysFunService;
 import com.gzu.su.manager.user.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,9 @@ public class LoginController {
 
     @Autowired
     UserInfoService userInfoService;
+
+    @Autowired
+    SysFunService sysFunService;
 
     public static Logger log = LoggerFactory.getLogger(LoginController.class);
 
@@ -81,9 +85,9 @@ public class LoginController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(@SessionAttribute(SessionInterceptor.SESSION_KEY) UserInfo userInfo, Model model) {
         try {
-//            List<SysFun> roleList = sysFunService.findByRoleId(userInfo.getRoleId());
-//            model.addAttribute("user_account", userInfo);
-//            model.addAttribute("role_list", roleList);
+            List<SysFun> roleList = sysFunService.findByRoleId(userInfo.getRoleId());
+            model.addAttribute("user_account", userInfo);
+            model.addAttribute("role_list", roleList);
             return "index";
         } catch (Exception e) {
             log.error(e.getMessage(),e);

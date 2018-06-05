@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>角色列表</title>
+		<link rel="stylesheet" href="/static/layui/css/layui.css">
+		<script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+		<script src="/static/layui/layui.all.js" type="text/javascript"  charset="UTF-8"></script>
+		<script type="text/html" id="barTpl">
+    		<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit">修改</a>
+			<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+		</script>
+		<style>
+			.search{
+				text-align: right;
+			}
+			.search input{
+				width: 300px;
+			}
+		</style>
+	</head>
+
+	<body class="layui-card-body">
+	<div class="header layui-row">
+			<div class="layui-col-xs8">
+				<button class="layui-btn" id="role_list">新增</button>
+			</div>
+			<div class="layui-col-xs4 search">
+				<span class=" layui-inline">
+					<input type="text" id="searchValue" required lay-verify="required" placeholder="请输入角色名称" autocomplete="off" class="layui-input">
+				</span>
+				<span class="layui-inline">
+				   <button id="searchBtn" class="layui-btn">搜索</button>
+				</span>
+			</div>
+		</div>
+	
+		<table class="layui-table" id="table" lay-filter="table"></table>
+		<script>
+			layui.use('laypage', function() {
+				var laypage = layui.laypage;
+
+				//执行一个laypage实例
+				laypage.render({
+					elem: 'page' ,
+					layout: ['prev', 'page', 'next', 'skip', 'count'],
+					count: 100
+				});
+			});
+		</script>
+		<script src="/static/management/user/role.list.js " charset="utf-8"></script>
+	</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="UTF-8">
+    <title>财务管理</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css"
+          media="all">
+    <script type="text/javascript" charset="UTF-8"
+            src="/static/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/static/layui/layui.all.js" type="text/javascript"
+            charset="UTF-8"></script>
+    <style type="text/css">
+        #promotion_add {
+            padding: 10px 10px;
+        }
+
+        .layui-row {
+            margin-top: 10px
+        }
+    </style>
+</head>
+
+<body class="layui-card-body">
+<div id="promotion_add">
+    <form class="layui-form" action="">
+        <input type="hidden" th:value="${financeInfo.id}" name="pid"
+               id="pid">
+        <input type="hidden" th:value="${financeInfo.financeDepartment}" name="f_department" id="fDepartmentId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">资金来源</label>
+            <div class="layui-input-block" th:if="${sign} eq 'add'">
+                <input type="text" lay-verify="financeSource"
+                       autocomplete="off"
+                       name="financeSource"
+                       placeholder="请输入资金来源"
+                       class="layui-input">
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'edit'">
+                <input type="text" lay-verify="financeSource"
+                       autocomplete="off"
+                       name="financeSource"
+                       th:value="${financeInfo.financeSource}"
+                       placeholder="修改资金来源"
+                       class="layui-input">
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'check'">
+                <input type="text" lay-verify="financeSource" readonly="readonly"
+                       autocomplete="off"
+                       name="financeSource"
+                       th:value="${financeInfo.financeSource}"
+                       placeholder="修改资金来源"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">资金用途</label>
+            <div class="layui-input-block" th:if="${sign} eq 'add'">
+                <input type="text" lay-verify="financePropose"
+                       autocomplete="off"
+                       name="financePropose"
+                       placeholder="请输入资金用途"
+                       class="layui-input">
+
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'edit'">
+                <input type="text" lay-verify="financePropose"
+                       autocomplete="off"
+                       name="financePropose"
+                       th:value="${financeInfo.financePropose}"
+                       placeholder="修改资金用途"
+                       class="layui-input">
+
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'check'">
+                <input type="text" lay-verify="financePropose" readonly="readonly"
+                       autocomplete="off"
+                       name="financePropose"
+                       th:value="${financeInfo.financePropose}"
+                       class="layui-input">
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请部门</label>
+            <div class="layui-input-inline">
+                <select id="mt-select" name="financeDepartment" lay-verify="required" lay-search="">
+                    <option th:if="${sign} eq 'add'" value="">请选择部门</option>
+                    <option th:each="dps : ${departmentInfoList}" th:value="${dps.depName}" th:text="${dps.depName}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">资金余额</label>
+            <div class="layui-input-block" th:if="${sign} eq 'add'">
+                <input type="text" lay-verify="financeRemain"
+                       autocomplete="off"
+                       name="financeRemain"
+                       placeholder="请输入金额余额"
+                       class="layui-input">
+
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'edit'">
+                <input type="text" lay-verify="financeRemain"
+                       autocomplete="off"
+                       name="financeRemain"
+                       th:value="${financeInfo.financeRemain}"
+                       placeholder="修改资金余额"
+                       class="layui-input">
+
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'check'">
+                <input type="text" lay-verify="financeRemain" readonly="readonly"
+                       autocomplete="off"
+                       name="financeRemain"
+                       th:value="${financeInfo.financeRemain}"
+                       class="layui-input">
+
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">审核建议</label>
+            <div class="layui-input-block" th:if="${sign} eq 'check'">
+                <textarea name="financeAdvice"  placeholder="请输入审核建议内容" class="layui-textarea"></textarea>
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'edit' or ${sign} eq 'add'">
+                <textarea name="financeAdvice" readonly="readonly" placeholder="仅在审核时输入" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">审核执行</label>
+            <div class="layui-input-block" th:if="${sign} eq 'check'">
+                <input type="radio" name="status" value="2" title="未通过">
+                <input type="radio" name="status" value="1" title="通过" checked>
+            </div>
+            <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'edit' or ${sign} eq 'add'">
+            <span th:if="${financeInfo.status eq '2'}">
+            <input type="radio" name="status" value="2" title="未通过">
+            </span>
+                <span th:if="${financeInfo.status eq '1'}">
+            <input type="radio" name="status" value="1" title="通过" checked>
+            </span>
+                <span th:if="${financeInfo.status eq '0'}">
+            <input type="radio" name="status" value="1" title="待审核" checked>
+            </span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-row" style="text-align: center;">
+                <button class="layui-btn" lay-submit
+                        lay-filter="doSubmit">提交
+                </button>
+                <button type="reset" class="layui-btn" id="btnCancel">
+                    取消
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="/static/management/finance/finance.info.js"
+        charset="utf-8"></script>
+<script type="text/javascript" charset="UTF-8"
+        src="/static/common/common.js"></script>
+</body>
+</html>

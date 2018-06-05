@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>增加用户</title>
+		<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="/static/zTree_v3/css/metroStyle/metroStyle.css" />
+	</head>
+
+	<body class="layui-card-body">
+		<form class="layui-form" action="">
+		<input name="id" type="hidden" id="id" th:value="${role.id}"/>
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色</label>
+				<div class="layui-input-block">
+					<input type="text" name="roleName" required lay-verify="roleName" placeholder="请输入角色" th:value="${role.roleName}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">描述</label>
+				<div class="layui-input-block">
+					<input type="text" name="roleDesc" required lay-verify="roleDesc" placeholder="请输入角色描述" th:value="${role.roleDesc}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">状态</label>
+				<div class="layui-input-block" th:if="${role.roleStatus} eq '0'">
+					<input type="checkbox" name="roleStatus" value="0" lay-skin="switch" checked>
+				</div>
+				<div class="layui-input-block" th:if="${role.roleStatus} eq '1'">
+					<input type="checkbox" name="roleStatus" value="1" lay-skin="switch">
+				</div>
+				<div class="layui-input-block" th:if="${#lists.isEmpty(role.roleStatus)}">
+					<input type="checkbox" name="roleStatus" value="0"  lay-skin="switch" checked>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">功能</label>
+				<div class="layui-input-block">
+					<ul id="treeDemo" class="ztree" style="width:260px; overflow:auto;"></ul>
+				</div>
+			</div>
+			
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit lay-filter="btnSubmit" id="btnSubmit">保存</button>
+					<button type="reset" class="layui-btn layui-btn-primary" id="btnCancel">关闭</button>
+				</div>
+			</div>
+			
+		</form>
+		
+		<script type="text/javascript" src="/static/zTree_v3/api/apiCss/jquery-1.6.2.min.js"></script>
+		<script type="text/javascript" src="/static/zTree_v3/js/jquery.ztree.core.min.js"></script>
+		<script src="/static/zTree_v3/js/jquery.ztree.excheck.min.js"></script>
+		<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+		<script src="/static/layui/layui.js"></script>
+		<script src="/static/management/user/role.info.js " charset="utf-8"></script>
+	</body>
+
+</html>

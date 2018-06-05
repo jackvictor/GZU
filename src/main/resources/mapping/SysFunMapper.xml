@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gzu.su.manager.user.dao.SysFunMapper">
-  <resultMap id="BaseResultMap" type="com.gzu.su.manager.user.model.SysFun">
-    <id column="ID" jdbcType="VARCHAR" property="id" />
-    <result column="FUN_NAME" jdbcType="VARCHAR" property="funName" />
-    <result column="FUN_ICON" jdbcType="VARCHAR" property="funIcon" />
-    <result column="YFUN_URL" jdbcType="VARCHAR" property="yfunUrl" />
-    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
-    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  <resultMap id="BaseResultMap" type="com.gzu.su.manager.user.model.SysFun" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FUN_NAME" property="funName" jdbcType="VARCHAR" />
+    <result column="FUN_ICON" property="funIcon" jdbcType="VARCHAR" />
+    <result column="FUN_URL" property="funUrl" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <collection property="sysFuns" ofType="com.gzu.su.manager.user.model.SysFun">
+      <id column="cId" property="id" jdbcType="VARCHAR" />
+      <result column="cName" property="funName" jdbcType="VARCHAR" />
+      <result column="cUrl" property="funUrl" jdbcType="VARCHAR" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    ID, FUN_NAME, FUN_ICON, YFUN_URL, PARENT_ID, CREATE_TIME, UPDATE_TIME
+    ID, FUN_NAME, FUN_ICON, FUN_URL, PARENT_ID, CREATE_TIME, UPDATE_TIME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -25,7 +30,7 @@
   </delete>
   <insert id="insert" parameterType="com.gzu.su.manager.user.model.SysFun">
     insert into gzusu_manager_sys_fun (ID, FUN_NAME, FUN_ICON, 
-      YFUN_URL, PARENT_ID, CREATE_TIME, 
+      FUN_URL, PARENT_ID, CREATE_TIME,
       UPDATE_TIME)
     values (#{id,jdbcType=VARCHAR}, #{funName,jdbcType=VARCHAR}, #{funIcon,jdbcType=VARCHAR}, 
       #{yfunUrl,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
@@ -44,7 +49,7 @@
         FUN_ICON,
       </if>
       <if test="yfunUrl != null">
-        YFUN_URL,
+        FUN_URL,
       </if>
       <if test="parentId != null">
         PARENT_ID,
@@ -90,7 +95,7 @@
         FUN_ICON = #{funIcon,jdbcType=VARCHAR},
       </if>
       <if test="yfunUrl != null">
-        YFUN_URL = #{yfunUrl,jdbcType=VARCHAR},
+        FUN_URL = #{yfunUrl,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null">
         PARENT_ID = #{parentId,jdbcType=VARCHAR},
@@ -108,10 +113,32 @@
     update gzusu_manager_sys_fun
     set FUN_NAME = #{funName,jdbcType=VARCHAR},
       FUN_ICON = #{funIcon,jdbcType=VARCHAR},
-      YFUN_URL = #{yfunUrl,jdbcType=VARCHAR},
+      FUN_URL = #{yfunUrl,jdbcType=VARCHAR},
       PARENT_ID = #{parentId,jdbcType=VARCHAR},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="findAllFuns" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from gzusu_manager_sys_fun
+    order by ID
+  </select>
+
+  <select id="findByRoleId" resultMap="BaseResultMap">
+    select a.ID,a.FUN_NAME,a.FUN_URL,a.FUN_ICON,b.ID as cId,b.FUN_NAME as cName,b.FUN_URL as cUrl
+    from (select sf.ID,sf.FUN_NAME,sf.FUN_URL,sf.FUN_ICON,sf.PARENT_ID
+    from gzusu_manager_role_fun_mid rfm,gzusu_manager_sys_fun sf
+    where rfm.ROLE_ID = #{roleId}
+    and rfm.FUN_ID = sf.ID
+    and sf.PARENT_ID = #{pId}) a
+    LEFT JOIN (select sf.FUN_NAME,sf.PARENT_ID,sf.ID,sf.FUN_URL
+    from gzusu_manager_role_fun_mid rfm, gzusu_manager_sys_fun sf
+    where rfm.ROLE_ID = #{roleId}
+    and sf.ID = rfm.FUN_ID) b
+    on a.ID = b.PARENT_ID
+    order by a.ID,b.ID
+  </select>
 </mapper>

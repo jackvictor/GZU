@@ -25,4 +25,5 @@ public interface DepartmentService {
     DepartmentInfo findDepartmentById(String id) throws Exception;
 
     List<DepartmentInfo> findAllDepartment() throws Exception;
+
 }

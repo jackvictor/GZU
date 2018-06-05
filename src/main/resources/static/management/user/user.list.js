@@ -15,12 +15,13 @@
         cols: [[
             {field:'userId', sort: false, title: '用户名'},
             {field:'userName', sort: false, title: '姓名'},
-            {field:'userRoleMid', sort: false,  templet:function(d){
-            	return d.userRoleMid.roleName;
-            }, title: '角色', width:'15%'},
+            {field:'roleName', sort: false, title: '角色'},
             {field:'eMail', sort: false, title: '邮箱'},
-            {field:'createTime', sort: false, title: '创建时间'},
-            {field:'updateTime', sort: false, title: '修改时间'},
+            {field:'userPosition', sort: false, title: '职务'},
+            {field:'userDepartmentName', sort: false, title: '部门'},
+            {field:'userMajor', sort: false, title: '专业'},
+            {field:'userGrade', sort: false, title: '年级'},
+            {field:'userPhoneNu', sort: false, title: '电话'},
             {field:'userStatus', sort: false, title: '状态',width:'6%',templet:function(d){
             	if(d.userStatus == '0'){
             		 return "正常";
@@ -49,7 +50,7 @@
 			title:'新增用户',
 //			maxmin:true,
 			fixed: false, //不固定
-			area: ['600px', '500px'],
+			area: ['1200px', '600px'],
 			offset: ['5px'],
 			content: '/user/info?sign=add'
 			
@@ -111,13 +112,13 @@ function doSearch(table){
 
 //查看
 function show(uid){
-	var url = '/user/show?uId='+uid;
+	var url = '/user/info?uId='+uid;
 	var title = '查询用户';
 	layer.open({
 		type: 2,
 		title:title,
 		fixed: false, //不固定
-		area: ['600px', '500px'],
+        area: ['1200px', '600px'],
 		offset: ['5px'],
 		content: url
 	});
@@ -135,7 +136,7 @@ function edit(pid,sign){
 		title:title,
 		//maxmin:true,
 		fixed: false, //不固定
-		area: ['600px', '500px'],
+        area: ['1200px', '600px'],
 		offset: ['5px'],
 		content: url
 		

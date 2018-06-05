@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzu.su.manager.finance.dao.FinanceInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gzu.su.manager.finance.model.FinanceInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="FINANCE_SOURCE" jdbcType="VARCHAR" property="financeSource" />
+    <result column="FINANCE_PROPOSE" jdbcType="VARCHAR" property="financePropose" />
+    <result column="FINANCE_MONEY" jdbcType="VARCHAR" property="financeMoney" />
+    <result column="FINANCE_DEPARTMENT" jdbcType="VARCHAR" property="financeDepartment" />
+    <result column="FINANCE_REMAIN" jdbcType="VARCHAR" property="financeRemain" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="FINANCE_ADVICE" jdbcType="VARCHAR" property="financeAdvice" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, FINANCE_SOURCE, FINANCE_PROPOSE, FINANCE_MONEY, FINANCE_DEPARTMENT, FINANCE_REMAIN, 
+    CREATE_TIME, UPDATE_TIME, FINANCE_ADVICE, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gzusu_manager_finance_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from gzusu_manager_finance_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gzu.su.manager.finance.model.FinanceInfo">
+    insert into gzusu_manager_finance_info (ID, FINANCE_SOURCE, FINANCE_PROPOSE, 
+      FINANCE_MONEY, FINANCE_DEPARTMENT, FINANCE_REMAIN, 
+      CREATE_TIME, UPDATE_TIME, FINANCE_ADVICE, 
+      STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{financeSource,jdbcType=VARCHAR}, #{financePropose,jdbcType=VARCHAR}, 
+      #{financeMoney,jdbcType=VARCHAR}, #{financeDepartment,jdbcType=VARCHAR}, #{financeRemain,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{financeAdvice,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gzu.su.manager.finance.model.FinanceInfo">
+    insert into gzusu_manager_finance_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="financeSource != null">
+        FINANCE_SOURCE,
+      </if>
+      <if test="financePropose != null">
+        FINANCE_PROPOSE,
+      </if>
+      <if test="financeMoney != null">
+        FINANCE_MONEY,
+      </if>
+      <if test="financeDepartment != null">
+        FINANCE_DEPARTMENT,
+      </if>
+      <if test="financeRemain != null">
+        FINANCE_REMAIN,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="financeAdvice != null">
+        FINANCE_ADVICE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="financeSource != null">
+        #{financeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="financePropose != null">
+        #{financePropose,jdbcType=VARCHAR},
+      </if>
+      <if test="financeMoney != null">
+        #{financeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="financeDepartment != null">
+        #{financeDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="financeRemain != null">
+        #{financeRemain,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financeAdvice != null">
+        #{financeAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gzu.su.manager.finance.model.FinanceInfo">
+    update gzusu_manager_finance_info
+    <set>
+      <if test="financeSource != null">
+        FINANCE_SOURCE = #{financeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="financePropose != null">
+        FINANCE_PROPOSE = #{financePropose,jdbcType=VARCHAR},
+      </if>
+      <if test="financeMoney != null">
+        FINANCE_MONEY = #{financeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="financeDepartment != null">
+        FINANCE_DEPARTMENT = #{financeDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="financeRemain != null">
+        FINANCE_REMAIN = #{financeRemain,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financeAdvice != null">
+        FINANCE_ADVICE = #{financeAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gzu.su.manager.finance.model.FinanceInfo">
+    update gzusu_manager_finance_info
+    set FINANCE_SOURCE = #{financeSource,jdbcType=VARCHAR},
+      FINANCE_PROPOSE = #{financePropose,jdbcType=VARCHAR},
+      FINANCE_MONEY = #{financeMoney,jdbcType=VARCHAR},
+      FINANCE_DEPARTMENT = #{financeDepartment,jdbcType=VARCHAR},
+      FINANCE_REMAIN = #{financeRemain,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      FINANCE_ADVICE = #{financeAdvice,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="findByPage" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    gzusu_manager_finance_info
+    <if test="fName != null and fName != ''">
+      WHERE
+      FINANCE_DEPARTMENT LIKE CONCAT('%',#{fName,jdbcType=VARCHAR},'%')
+      OR
+      FINANCE_PROPOSE LIKE CONCAT('%',#{fName,jdbcType=VARCHAR},'%')
+    </if>
+    order by UPDATE_TIME DESC
+    LIMIT #{startNum},#{size}
+  </select>
+
+
+  <select id="findByPageCount" resultType="java.lang.Integer">
+    SELECT
+    COUNT(f.ID)
+    FROM (
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    gzusu_manager_finance_info
+    <if test="fName != null and fName != ''">
+      WHERE
+      FINANCE_DEPARTMENT LIKE CONCAT('%',#{fName,jdbcType=VARCHAR},'%')
+      OR
+      FINANCE_PROPOSE LIKE CONCAT('%',#{fName,jdbcType=VARCHAR},'%')
+    </if>
+    )f
+  </select>
+
+  <select id="checkByPage" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    gzusu_manager_finance_info
+    WHERE STATUS = "0"
+    <if test="fName != null and fName != ''">
+      AND
+      FINANCE_DEPARTMENT LIKE CONCAT('%',#{fName,jdbcType=VARCHAR},'%')
+      OR
+      FINANCE_PROPOSE LIKE CONCAT('%',#{fName,jdbcType=VARCHAR},'%')
+    </if>
+    order by UPDATE_TIME DESC
+    LIMIT #{startNum},#{size}
+  </select>
+
+  <select id="checkByPageCount" resultType="java.lang.Integer">
+    SELECT
+    COUNT(f.ID)
+    FROM (
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    gzusu_manager_finance_info
+   WHERE STATUS = "0"
+    <if test="fName != null and fName != ''">
+      AND
+      FINANCE_DEPARTMENT LIKE CONCAT('%',#{fName,jdbcType=VARCHAR},'%')
+      OR
+      FINANCE_PROPOSE LIKE CONCAT('%',#{fName,jdbcType=VARCHAR},'%')
+    </if>
+    )f
+  </select>
+</mapper>

@@ -87,7 +87,7 @@ layui.use(['table', 'form', 'layer'], function () {
         var open_height = Math.round($(parent.document.getElementsByClassName("layui-tab-content")[0]).height() * 0.83);
         layer.open({
             type: 2,
-            title:'新增部门',
+            title:'新增事务',
             fixed: false, //不固定
             area:['100%', open_height+'px'],
             offset: ['0px', '0px'],
@@ -252,7 +252,7 @@ function doSearch() {
         page: {curr: 1}
     });
 }
-
+//查看、修改
 function detail(pid,sign){
     var open_height = Math.round($(parent.document.getElementsByClassName("layui-tab-content")[0]).height() * 0.83);
     var url = '/transaction/info?pid='+pid+'&sign='+sign;
@@ -270,6 +270,39 @@ function detail(pid,sign){
         offset: ['0px', '0px'],
         content: url
 
+    });
+}
+//删除
+function delete_goods(pid) {
+    console.log(pid);
+    layer.confirm('确定要删除吗？', function (index) {
+        layer.load(1);
+        $.ajax({
+            url: "/transaction/delete?pid=" + pid,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                layer.closeAll('loading');
+                if (data != undefined && data != "") {
+                    if (data.code == 200) {
+                        layer.msg(data.msg, {icon: 1});
+                        layui.table.reload('table', {
+                            done: function (res, curr, count) {
+                                if (res.data.length < 1 && curr != 1) {
+                                    layui.table.reload('table', {page: {curr: (curr - 1)}});
+                                }
+                            }
+                        });
+                    } else {
+                        layer.msg(data.msg, {icon: 2});
+                    }
+                }
+            },
+            error: function (xhr, status, info) {
+                layer.closeAll('loading');
+                layer.msg('网络异常，请刷新页面', {icon: 2});
+            }
+        });
     });
 }
 

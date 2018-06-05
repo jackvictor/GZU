@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+    <script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/static/layui/layui.all.js" type="text/javascript" charset="UTF-8"></script>
+    <title>审核事务</title>
+    <script type="text/html" id="barTpl">
+        <a class="layui-btn  layui-btn-xs " onclick="detail('{{d.id}}','check')">审核</a>
+    </script>
+    <script type="text/html" id="barTpl1">
+        <a class="layui-btn  layui-btn-xs " onclick="detail('{{d.id}}','show')">查看</a>
+        <a class="layui-btn  layui-btn-xs  layui-btn-warm" onclick="detail('{{d.id}}','edit')">修改</a>
+        <a class="layui-btn  layui-btn-xs layui-btn-danger" onclick="delete_goods('{{d.id}}')">删除</a>
+    </script>
+    <style>
+        .search{
+            text-align: right;
+        }
+        .search input{
+
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body class="layui-card-body">
+<div class="layui-row">
+    <div class="layui-col-xs8">
+        <button id="finance_check" class="layui-btn" style="margin: 10px;">等待审核</button>
+        <button id="finance_checked" class="layui-btn" style="margin: 10px;">审核情况</button>
+    </div>
+    <div class="layui-col-xs4 search" >
+				<span class=" layui-inline">
+                          <input type="text" id="searchValue" required lay-verify="required" placeholder="请输入部门名/部长名" autocomplete="off" class="layui-input">
+                        </span>
+        <span class="layui-inline">
+                           <button class="layui-btn" id="doSearch">搜索</button>
+                        </span>
+    </div>
+</div>
+<div class="layui-row">
+    <table class="layui-table" id="table" lay-filter="table"></table>
+</div>
+<script src="/static/management/finance/finance.check.js" charset="utf-8"></script>
+<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+</body>
+
+</html>

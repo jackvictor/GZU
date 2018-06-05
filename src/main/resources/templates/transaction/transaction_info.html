@@ -62,11 +62,11 @@
         <div>
             <label class="layui-form-label">承办部门</label>
             <div class="layui-input-block" th:if="${sign} eq 'add'">
-                <button id="promotion_iframe" type="button" class="layui-btn "><i class="layui-icon">&#xe620;</i>增加商家</button>
+                <button id="promotion_iframe" type="button" class="layui-btn "><i class="layui-icon">&#xe620;</i>增加部门</button>
                 <span id="merchant_list"></span>
             </div>
             <div class="layui-input-block" th:if="${sign} eq 'edit'">
-                <button id="promotion_iframe" type="button" class="layui-btn "><i class="layui-icon">&#xe620;</i>增加商家</button>
+                <button id="promotion_iframe" type="button" class="layui-btn "><i class="layui-icon">&#xe620;</i>增加部门</button>
                 <span id="merchant_list">
 							<span th:each="dep : ${transactionInfoVo.departmentInfos}">
 								<!-- <input type="checkbox" th:title="${mer.merchantName}" th:value="${mer.id}" checked disabled="disabled"> -->
@@ -75,7 +75,7 @@
 						</span>
             </div>
             <div class="layui-input-block" th:if="${sign} eq 'show' or ${sign} eq 'check'">
-                <button id="promotion_iframe" type="button" class="layui-btn layui-btn-disabled"><i class="layui-icon">&#xe620;</i>增加商家</button>
+                <button id="promotion_iframe" type="button" class="layui-btn layui-btn-disabled"><i class="layui-icon">&#xe620;</i>增加部门</button>
                 <span id="merchant_list">
 							<span th:each="dep : ${transactionInfoVo.departmentInfos}">
 								<!-- <input type="checkbox" th:title="${mer.merchantName}" th:value="${mer.id}" checked disabled="disabled"> -->

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>增加用户</title>
+		<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" />
+	</head>
+	<body class="layui-card-body">
+		<input type="hidden" th:value="${user.roleId}" id="h_roleId">
+		<form class="layui-form" action="">
+		<input name="id" type="hidden" id="id" th:value="${user.id}"/>
+			<div class="layui-form-item">
+				<label class="layui-form-label">用户名</label>
+				<div class="layui-input-block" th:if="${#lists.isEmpty(user.id)}">
+					<input type="text" name="userId" required lay-verify="userId" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-input-block" th:if="${!#lists.isEmpty(user.id)}">
+					<input type="text" th:placeholder="${user.userId}" autocomplete="off" class="layui-input" readonly>
+					<input type="hidden" name="userId" th:value="${user.userId}">
+				</div>
+			</div>
+			<div class="layui-form-item" th:if="${#lists.isEmpty(user.id)}">
+				<label class="layui-form-label">密码</label>
+				<div class="layui-input-block">
+					<input type="password" name="encryptPassword" required lay-verify="pwd" placeholder="请输入密码" th:value="${user.encryptPassword}" autocomplete="new-password" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">姓名</label>
+				<div class="layui-input-block">
+					<input type="text" name="userName" required lay-verify="userName" placeholder="请输入姓名" th:value="${user.userName}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">邮箱</label>
+				<div class="layui-input-block">
+					<input type="text" name="eMail" required lay-verify="eMail" placeholder="请输入邮箱" th:value="${user.eMail}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">职位</label>
+				<div class="layui-input-block">
+					<input type="text" name="userPosition" required lay-verify="userPosition" placeholder="请输入职位" th:value="${user.userPosition}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">部门</label>
+				<div class="layui-input-block">
+					<input type="text" name="userDepartmentName" required lay-verify="userDepartmentName" placeholder="请输入部门" th:value="${user.userDepartmentName}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">专业</label>
+				<div class="layui-input-block">
+					<input type="text" name="userMajor" required lay-verify="userMajor" placeholder="请输入专业" th:value="${user.userMajor}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">年级</label>
+				<div class="layui-input-block">
+					<input type="text" name="userGrade" required lay-verify="userGrade" placeholder="请输入年级" th:value="${user.userGrade}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">电话</label>
+				<div class="layui-input-block">
+					<input type="text" name="userPhoneNu" required lay-verify="userPhoneNu" placeholder="请输入电话号码" th:value="${user.userPhoneNu}" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色</label>
+				<div class="layui-input-block">
+				<select id="role-slect" name="roleId" lay-verify="roleId" >
+					<option value=''>-请选择-</option>
+					<option th:each="ro:${roles}" th:value="${ro.id}" th:text="${ro.roleName}"></option>
+				</select>
+			</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">性别</label>
+				<div class="layui-input-block" th:if="${user.userSex} eq '0'">
+					<input type="radio" name="userSex" value="0" title="男" checked>
+					<input type="radio" name="userSex" value="1" title="女">
+				</div>
+				<div class="layui-input-block" th:if="${user.userSex} eq '1'">
+					<input type="radio" name="userSex" value="0" title="男">
+					<input type="radio" name="userSex" value="1" title="女" checked>
+				</div>
+				<div class="layui-input-block" th:if="${#lists.isEmpty(user.userSex)}">
+					<input type="radio" name="userSex" value="0" title="男" checked>
+					<input type="radio" name="userSex" value="1" title="女">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">状态</label>
+				<div class="layui-input-block" th:if="${user.userStatus} eq '0'">
+					<input type="checkbox" name="userStatus" value="0" lay-skin="switch" checked>
+				</div>
+				<div class="layui-input-block" th:if="${user.userStatus} eq '1'">
+					<input type="checkbox" name="userStatus" value="1" lay-skin="switch">
+				</div>
+				<div class="layui-input-block" th:if="${#lists.isEmpty(user.userStatus)}">
+					<input type="checkbox" name="userStatus" value="0"  lay-skin="switch" checked>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit lay-filter="btnSubmit" id="btnSubmit">保存</button>
+					<button type="reset" class="layui-btn layui-btn-primary" id="btnCancel">关闭</button>
+				</div>
+			</div>
+		</form>
+		<script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+		<script src="/static/layui/layui.all.js"></script>
+		<script src="/static/management/user/user.info.js"></script>
+	</body>
+
+</html>

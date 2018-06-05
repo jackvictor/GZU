@@ -34,7 +34,7 @@ public class UserPage {
 
     private String userStatus;
 
-    private UserRoleMid userRoleMid;
+    private String roleName;
 
     public String getuId() {
         return uId;
@@ -132,11 +132,11 @@ public class UserPage {
         this.userStatus = userStatus;
     }
 
-    public UserRoleMid getUserRoleMid() {
-        return userRoleMid;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setUserRoleMid(UserRoleMid userRoleMid) {
-        this.userRoleMid = userRoleMid;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

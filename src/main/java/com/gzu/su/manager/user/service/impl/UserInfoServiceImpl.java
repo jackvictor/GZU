@@ -64,6 +64,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         user.setRandomSalt(salt);
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
+        user.setUserStartTime(new Date());
         return userInfoMapper.insert(user);
     }
 
@@ -76,7 +77,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             user.setRandomSalt(userInfo.getRandomSalt());
             user.setEncryptPassword(userInfo.getEncryptPassword());
             user.setUpdateTime(new Date());
-
+            user.setUserStartTime(userInfo.getUserStartTime());
             userInfoMapper.updateByPrimaryKey(user);
         }
 

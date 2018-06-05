@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>修改密码</title>
+		<link rel="stylesheet" type="text/css" href="/static/layui/css/layui.css" />
+	</head>
+
+	<body class="layui-card-body">
+		<form class="layui-form">
+			<input name="id" type="hidden" id="id" th:value="${user.id}"/>
+			<div class="layui-form-item">
+				<label class="layui-form-label">原密码</label>
+				<div class="layui-input-block">
+					<input type="password" placeholder="请输入原密码" name="pwd" lay-verify="pwd" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">新密码</label>
+				<div class="layui-input-block">
+					<input id="npwd" type="password" placeholder="请输入新密码" name="npwd" lay-verify="pwd" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">请再次输入</label>
+				<div class="layui-input-block">
+					<input id="snpwd" type="password" placeholder="请再次输入新密码" name="snpwd" lay-verify="pwd" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" lay-submit lay-filter="btnSubmit" id="btnSubmit">修改</button>
+					<button type="reset" class="layui-btn layui-btn-primary" id="btnCancel">关闭</button>
+				</div>
+			</div>
+		</form>
+		<script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+		<script src="/static/layui/layui.all.js"></script>
+		<script src="/static/management/user/user.pwd.js"></script>
+	</body>
+
+</html>

@@ -32,7 +32,7 @@ layui.use(['form', 'laydate','jquery' , 'layer'], function() {
 		$("#right").html("");
 	});
 	
-	//根据商家名称查询，并填充左侧div
+	//根据部门名称查询，并填充左侧div
 	$("#searchMer").on("click",function(){
 		//活动ID
 		var promotionID = $("#promotionId").val();
@@ -83,7 +83,7 @@ layui.use(['form', 'laydate','jquery' , 'layer'], function() {
 		//获得右侧已选项
 		var right_div = $("#right").find("input");
 		var right_div_list = new Array();
-		//添加商家id到list中，ps 右侧
+		//添加部门id到list中，ps 右侧
 		if(right_div.length > 0){
 			for(var i= 0; i < right_div.length;i++){
 				var merId = $(right_div[i]).val();
@@ -97,7 +97,7 @@ layui.use(['form', 'laydate','jquery' , 'layer'], function() {
 			for(var i= 0; i < left_check_div.length;i++){
 				var merId = $(left_check_div[i]).parent().find("input").val();
 				var merTitle = $(left_check_div[i]).parent().find("input").attr("title");
-				//只添加右侧没有的商家
+				//只添加右侧没有的部门
 				if($.inArray(merId, right_div_list) == -1){
 					mer_input = mer_input + "<span style='display: inherit;margin-left: 5px;'><input type='checkbox' lay-skin='primary' name='like' title='"+merTitle+"' value="+merId+"></span>";
 				}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>用户列表</title>
+		<link rel="stylesheet" href="/static/layui/css/layui.css">
+		<script type="text/javascript"  charset="UTF-8" src="/static/jquery/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript"  charset="UTF-8" src="/static/common/common.js"></script>
+		<script src="/static/layui/layui.all.js" type="text/javascript"  charset="UTF-8"></script>
+		<script type="text/html" id="barTpl">
+			<a class="layui-btn  layui-btn-xs" onclick="show('{{d.uId}}')">查看</a>
+    		<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit" onclick="edit('{{d.uId}}','edit')">修改</a>
+			<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+		</script>
+		<script type="text/html" id="adminBar">
+    		<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit" onclick="edit('{{d.uId}}','edit')">修改</a>
+			<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+			<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="resetpwd">重置密码</a>
+		</script>
+		<style>
+			.search{
+				text-align: right;
+			}
+			.search input{
+				width: 300px;
+			}
+		</style>
+	</head>
+
+	<body class="layui-card-body">
+		<div class="header layui-row">
+			<div class="layui-col-xs8">
+				<button class="layui-btn" id="user_list">新增</button>
+			</div>
+			<div class="layui-col-xs4 search">
+				<span class=" layui-inline">
+					<input type="text" id="searchValue" required lay-verify="required" placeholder="请输入用户名称/姓名/邮箱" autocomplete="off" class="layui-input">
+				</span>
+				<span class="layui-inline">
+				   <button id="searchBtn" class="layui-btn">搜索</button>
+				</span>
+			</div>
+		</div>
+		<table class="layui-table" id="table" lay-filter="table"></table>
+		<input type="hidden" th:value="${user_account}" id="user_account"/>
+		<script src="/static/management/user/user.list.js " charset="utf-8"></script>
+	</body>
+
+</html>
